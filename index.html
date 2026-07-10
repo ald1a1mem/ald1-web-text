@@ -1,0 +1,1425 @@
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> ALD1 檔案室 </title>
+    <link rel="icon" type="image/png" href="https://github.com/ald1a1mem.png">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    
+<style>
+        :root {
+            --main-color: #5698c3;
+            --bg-color: #f4f8fb;
+            --card-bg: #ffffff;
+            --text-color: #3b5973;
+            --light-blue: #e6f0f7;
+            --active-color: #427fa8;
+        }
+
+        body {
+            font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* 網頁頂部標頭 */
+        .brand-header {
+            text-align: center;
+            padding: 30px 20px 15px 20px;
+        }
+        
+        .brand-title {
+            font-size: 2.6rem;
+            color: var(--main-color);
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 0px #ffffff, 4px 4px 0px rgba(86, 152, 195, 0.15);
+        }
+
+        /* 網頁頂部 Tab 切換鍵按鈕列 */
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            background: #ffffff;
+            padding: 8px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(86, 152, 195, 0.1);
+            margin-bottom: 30px;
+            max-width: 90%;
+            flex-wrap: wrap;
+            border: 2px solid var(--light-blue);
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            background: var(--light-blue);
+            color: var(--main-color);
+        }
+
+        /* 按鈕啟動時的預設深藍色設定 */
+        .tab-btn.active {
+            background: var(--main-color);
+            color: white;
+            box-shadow: 0 4px 0px var(--active-color);
+        }
+
+        /* 按鈕點擊變色設定（倒數藍、舞台棕、節目綠、YT粉） */
+        .tab-buttons .tab-btn.active:nth-child(1) {
+            background-color: #5698c3 !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 0px #427fa8 !important;
+        }
+        .tab-buttons .tab-btn.active:nth-child(2) {
+            background-color: #c48b59 !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 0px #ab7343 !important;
+        }
+        .tab-buttons .tab-btn.active:nth-child(3) {
+            background-color: #5b8c76 !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 0px #446e5a !important;
+        }
+        .tab-buttons .tab-btn.active:nth-child(4) {
+            background-color: #b87070 !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 0px #9e5656 !important;
+        }
+
+        /* 內容容器 */
+        .container {
+            max-width: 750px;
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 預設隱藏所有分頁，只顯示 active 的那一頁 */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* 可愛手帳風卡片 */
+        .card {
+            background: var(--card-bg);
+            border: 4px solid var(--main-color);
+            border-radius: 28px;
+            padding: 35px 25px;
+            box-shadow: 0 10px 0px rgba(86, 152, 195, 0.15);
+            position: relative;
+            margin-bottom: 35px;
+        }
+
+        .card::before {
+            content: '● ●';
+            position: absolute;
+            top: 12px;
+            left: 20px;
+            color: var(--main-color);
+            opacity: 0.4;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+        }
+
+        h2 {
+            color: var(--main-color);
+            font-size: 1.7rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .status-badge {
+            font-size: 1rem;
+            background: var(--light-blue);
+            color: var(--main-color);
+            padding: 6px 18px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        /* 倒數計時 */
+        .countdown-wrap {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .time-box {
+            background: var(--main-color);
+            color: white;
+            padding: 12px 0;
+            border-radius: 20px;
+            width: 85px;
+            box-shadow: 0 5px 0px var(--active-color);
+            text-align: center;
+        }
+
+        .time-num {
+            font-size: 2.2rem;
+            font-weight: 700;
+            display: block;
+            line-height: 1.1;
+        }
+
+        .time-label {
+            font-size: 0.8rem;
+            margin-top: 4px;
+            display: block;
+            opacity: 0.85;
+        }
+
+        /* 日程表 */
+        .schedule-list {
+            text-align: left;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .schedule-item {
+            background: #fafbfc;
+            border: 2px dashed #b9d2e3;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .date-text {
+            font-weight: 700;
+            color: var(--main-color);
+            font-size: 1rem;
+            background: var(--light-blue);
+            padding: 3px 10px;
+            border-radius: 10px;
+        }
+
+        .event-text {
+            flex-grow: 1;
+            padding-left: 15px;
+            font-size: 1rem;
+        }
+
+        /* 影音卡片網格 */
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .countdown-wrap { flex-wrap: wrap; }
+        }
+
+        .video-card {
+            background: #ffffff;
+            border: 2px solid #b9d2e3;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: transform 0.2s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-3px);
+        }
+
+        /* 響應式影片外殼 */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #eef2f5;
+        }
+
+        .video-info {
+            padding: 12px;
+        }
+
+        .video-title {
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+            color: var(--text-color);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.3;
+        }
+
+        .video-date {
+            font-size: 0.8rem;
+            color: #8faec6;
+        }
+
+        /* 頁尾樣式 */
+        footer {
+            margin: 20px 0 30px 0;
+            font-size: 0.85rem;
+            color: #a0b9cc;
+            text-align: center;
+            width: 100%;
+            letter-spacing: 1px;
+        }
+    </style> 	
+</head>
+<body>
+
+    <div class="brand-header">
+        <div class="brand-title">ALPHA DRIVE ONE</div>
+    </div>
+
+<div class="tab-buttons">
+    <button class="tab-btn" onclick="showTab('countdown-content', this)">📅 回歸倒數</button>
+    <button class="tab-btn" onclick="showTab('stage-content', this)">🎤 舞台</button>
+    <button class="tab-btn" onclick="showTab('variety-content', this)">🎬 節目</button>
+    <button class="tab-btn" onclick="showTab('yt-content', this)">📺 官方YT</button>
+</div>
+
+<!-- ================= 分頁 1：回歸倒數 ================= -->
+    <div class="container">
+<div id="countdown-content" class="tab-content active">
+
+<style>
+    #countdown-content .card {
+        border: 3px solid #5698c3 !important;
+    }
+    #countdown-content .card::before,
+    #countdown-content .card::after,
+    #countdown-content .dot { 
+        display: none !important;
+    }
+
+    /* 標題與日程表文字變藍色 */
+    #countdown-content h2, 
+    #countdown-content h1,
+    #countdown-content .schedule-title,
+    #countdown-content .schedule-text,
+    #countdown-content .schedule-item {
+        color: #5698c3 !important;
+    }
+
+    /* 日程表日期文字變藍色 */
+    #countdown-content .date-box {
+        background: transparent !important;
+        color: #5698c3 !important;
+        border: none !important;
+    }
+
+    /* 迷你二輯小標籤變藍底 */
+    #countdown-content .album-badge {
+        background-color: #5698c3 !important;
+        color: #ffffff !important;
+    }
+
+    /* 倒數計時器大方塊變藍色背景 */
+    #countdown-content .countdown-timer > div,
+    #countdown-content .timer-box,
+    #countdown-content .countdown-box {
+        background-color: #5698c3 !important;
+        border-radius: 20px !important; 
+    }
+
+    /* 計時器內部數字與英文死守白色 */
+    #countdown-content .countdown-timer div,
+    #countdown-content .countdown-timer span,
+    #countdown-content .timer-box span,
+    #countdown-content .countdown-box span {
+        color: #ffffff !important;
+        display: inline-block;
+    }
+</style>
+
+            <div class="card" style="text-align: center;">
+                <h2>COMEBACK</h2>
+                <div class="status-badge">迷你二輯</div>
+
+                <div class="countdown-wrap">
+                    <div class="time-box"><span class="time-num" id="days">00</span><span class="time-label">Days</span></div>
+                    <div class="time-box"><span class="time-num" id="hours">00</span><span class="time-label">Hours</span></div>
+                    <div class="time-box"><span class="time-num" id="minutes">00</span><span class="time-label">Mins</span></div>
+                    <div class="time-box"><span class="time-num" id="seconds">00</span><span class="time-label">Secs</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>回歸日程表</h2>
+                <ul class="schedule-list">
+                    <li class="schedule-item">
+                        <span class="date-text">08.??</span>
+                        <span class="event-text">概念照 </span>
+                    </li>
+                    <li class="schedule-item">
+                        <span class="date-text">08.??</span>
+                        <span class="event-text"> MV預告 </span>
+                    </li>
+                    <li class="schedule-item">
+                        <span class="date-text">08.??</span>
+                        <span class="event-text">MV </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+<!-- ================= 分頁 2：打歌舞台/直拍 ================= -->
+<div id="stage-content" class="tab-content">
+
+<style>
+    #stage-content {
+        padding: 20px 0; width: 100%; max-width: 710px; margin: 0 auto; box-sizing: border-box;
+    }
+    #stage-content .card {
+        background: #ffffff !important;
+        border: 3px solid #c48b59 !important;
+        border-radius: 30px !important;
+        padding: 30px 25px !important;
+        margin-bottom: 30px !important;
+        box-shadow: 0 8px 24px rgba(196, 139, 89, 0.1) !important;
+        width: 100% !important; box-sizing: border-box !important; display: block !important;
+    }
+    /* 1. 標題、影片標題與影片日期全部改成焦糖暖棕 */
+    #stage-content h2,
+    #stage-content .video-title,
+    #stage-content .stage-title,
+    #stage-content .video-member,
+    #stage-content .video-date,
+    #stage-content .stage-date {
+        color: #c48b59 !important;
+    }
+    #stage-content h2 {
+        font-size: 24px !important; margin-top: 0 !important; margin-bottom: 20px !important; text-align: center !important; font-weight: bold !important;
+    }
+    /* 2. 徹底隱藏左上角長方體 */
+    #stage-content .card::before,
+    #stage-content .dot,
+    #stage-content .circle { 
+        display: none !important; 
+    }
+</style>
+
+<div class="card">
+    <h2>迷一</h2>
+    <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
+        <a href="https://www.youtube.com/watch?v=VxcPu1Aw5lQ" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/VxcPu1Aw5lQ/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">[MPD]ALPHA DRIVE ONE Chains ALD1 DEBUT SHOW [THE FIRST ALARM]</div>
+                <div class="video-date">2026.01.13</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=QnhJMrgSLQ8" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/QnhJMrgSLQ8/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - Cinnamon Shake</div>
+                <div class="video-date">2026.01.22</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=iDbqiSlxk0o" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/iDbqiSlxk0o/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - Cinnamon Shake</div>
+                <div class="video-date">2026.02.06</div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <h2> FORMULA</h2>
+    <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
+        <a href="https://www.youtube.com/watch?v=4WWUpLs-cNM" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/4WWUpLs-cNM/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">[MPD] ALPHA DRIVE ONE FORMULA</div>
+                <div class="video-date">2026.01.15</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=7YS8JwrYX0o" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/7YS8JwrYX0o/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE – FORMULA</div>
+                <div class="video-date">2026.01.17</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=9lKLYA-kbY8" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/9lKLYA-kbY8/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - FORMULA</div>
+                <div class="video-date">2026.01.18</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=9Cn8QuefzYw" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/9Cn8QuefzYw/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - FORMULA</div>
+                <div class="video-date">2026.01.28</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=3Fl8NARxmQ0" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/3Fl8NARxmQ0/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - FORMULA</div>
+                <div class="video-date">2026.02.07</div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <h2>FREAK ALARM</h2>
+    <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
+        <a href="https://www.youtube.com/watch?v=oBAYSDzPY6U" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/oBAYSDzPY6U/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">[MPD]ALPHA DRIVE ONE FREAK ALARM ALD1 DEBUT SHOW [THE FIRST ALARM]</div>
+                <div class="video-date">2026.01.12</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=2onMomjzvOQ" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/2onMomjzvOQ/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">[MPD] ALPHA DRIVE ONE FREAK ALARM</div>
+                <div class="video-date">2026.01.15</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=W8bDKrm-0dw" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/W8bDKrm-0dw/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE FREAK ALARM</div>
+                <div class="video-date">2026.01.16</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=up5RRkhlLOY" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/up5RRkhlLOY/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE – FREAK ALARM</div>
+                <div class="video-date">2026.01.17</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=FwxQ8WN7REQ" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/FwxQ8WN7REQ/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);"> ALPHA DRIVE ONE - FREAK ALARM</div>
+                <div class="video-date">2026.01.18</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=I5kH7QUNCSQ" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/I5kH7QUNCSQ/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - FREAK ALARM</div>
+                <div class="video-date">2026.01.18</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=zwRaibVNY48" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/zwRaibVNY48/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - FREAK ALARM</div>
+                <div class="video-date">2026.01.24</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=xzrwhv8RTgw" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/xzrwhv8RTgw/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - FREAK ALARM</div>
+                <div class="video-date">2026.01.25</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=ctxHNdel0FY" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/ctxHNdel0FY/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - FREAK ALARM</div>
+                <div class="video-date">2026.01.28</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=Rs5tKjeOy6w" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/Rs5tKjeOy6w/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - FREAK ALARM</div>
+                <div class="video-date">2026.01.29</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=tfYg-i1r3CI" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/tfYg-i1r3CI/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - FREAK ALARM</div>
+                <div class="video-date">2026.01.31</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=zm7RCon5df8" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/zm7RCon5df8/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - FREAK ALARM</div>
+                <div class="video-date">2026.02.01</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=ludr0-kQW4E" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/ludr0-kQW4E/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - FREAK ALARM</div>
+                <div class="video-date">2026.02.05</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=PP82RfINfbM" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/PP82RfINfbM/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - FREAK ALARM</div>
+                <div class="video-date">2026.02.06</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=Qv6kK8y-D24" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/Qv6kK8y-D24/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - FREAK ALARM</div>
+                <div class="video-date">2026.02.07</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=w_DAh0ETRsg" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/w_DAh0ETRsg/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - FREAK ALARM</div>
+                <div class="video-date">2026.02.08</div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <h2>OMG!</h2>
+    <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
+        <a href="https://www.youtube.com/watch?v=FQcBkvKA128" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/FQcBkvKA128/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - OMG!</div>
+                <div class="video-date">2026.05.27</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=-Fio6bo-yEI" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/-Fio6bo-yEI/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - OMG!</div>
+                <div class="video-date">2026.05.28</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=2TeX27mSD-s" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/2TeX27mSD-s/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - OMG!</div>
+                <div class="video-date">2026.05.29</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=GbulWque6yY" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/GbulWque6yY/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - OMG!</div>
+                <div class="video-date">2026.05.29</div>
+            </div>
+        </a>
+        <a href="https://www.youtube.com/watch?v=ZRoNRaQRM50" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/ZRoNRaQRM50/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - OMG!</div>
+                <div class="video-date">2026.05.30</div>
+            </div>
+        </a>
+    </div>
+</div>
+</div>
+
+<!-- ================= 分頁 3：節目 ================= -->
+<div id="variety-content" class="tab-content" style="display: none;">
+    
+<style>
+    #variety-content {
+        padding: 20px 0; width: 100%; max-width: 710px; margin: 0 auto; box-sizing: border-box;
+    }
+    #variety-content .card {
+        background: #ffffff !important;
+        border: 3px solid #5b8c76 !important;
+        border-radius: 30px !important;
+        padding: 30px 25px !important;
+        margin-bottom: 30px !important;
+        box-shadow: 0 8px 24px rgba(91, 140, 118, 0.1) !important;
+        width: 100% !important; box-sizing: border-box !important; display: block !important;
+    }
+    /* 1. 標題、影片名、成員名、影片日期全部變成迷霧森林深綠 */
+    #variety-content h2,
+    #variety-content .video-title,
+    #variety-content .video-member,
+    #variety-content .video-date,
+    #variety-content .variety-date {
+        color: #5b8c76 !important;
+    }
+    #variety-content h2 {
+        font-size: 24px !important; margin-top: 0 !important; margin-bottom: 20px !important; text-align: center !important; font-weight: bold !important;
+    }
+    /* 2. 徹底隱藏左上角長方體 */
+    #variety-content .card::before,
+    #variety-content .dot,
+    #variety-content .circle { 
+        display: none !important; 
+    }
+</style>
+
+    <div class="card">
+        <h2>UP CONO</h2>
+        <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
+
+                    <a href="https://www.youtube.com/watch?v=q8BjPLD44b8" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/q8BjPLD44b8/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">UP CONO EP.7 ALPHA DRIVE ONE</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            俊抒、LEO、相沅、鑫隆、安信
+        </div>
+                <div class="video-date">2026.06.04</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=sWPO0IWQfXc" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/sWPO0IWQfXc/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">UP CONO EP.8 ALPHA DRIVE ONE</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            俊抒、LEO、相沅、鑫隆、安信
+        </div>
+                <div class="video-date">2026.06.11</div>
+            </div>
+        </a>
+
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>STUDIO CHOOM</h2>
+        <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
+
+                    <a href="https://www.youtube.com/watch?v=4hB-zW_q0gg" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/4hB-zW_q0gg/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">(Behind) ALPHA DRIVE ONE 'FREAK ALARM' | STUDIO CHOOM ORIGINAL (ENG/JPN)</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            全員
+        </div>
+                <div class="video-date">2026.01.31</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=SJ3ndN11eaY" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/SJ3ndN11eaY/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">(Behind) ALPHA DRIVE ONE 'OMG!' | STUDIO CHOOM ORIGINAL (ENG/JPN)</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            俊抒、ARNO、LEO、相沅、鑫隆、安信、相炫
+        </div>
+                <div class="video-date">2026.06.15</div>
+            </div>
+        </a>
+
+        </div>
+    </div>
+</div>
+
+<!-- ================= 分頁 4：官方YT ================= -->
+<div id="yt-content" class="tab-content" style="display: none;">
+
+<style>
+    #yt-content {
+        padding: 20px 0; width: 100%; max-width: 710px; margin: 0 auto; box-sizing: border-box;
+    }
+    #yt-content .card {
+        background: #ffffff !important;
+        border: 3px solid #b87070 !important; /* 換成乾燥玫瑰粉框 */
+        border-radius: 30px !important;
+        padding: 30px 25px !important;
+        margin-bottom: 30px !important;
+        box-shadow: 0 8px 24px rgba(184, 112, 112, 0.1) !important;
+        width: 100% !important; box-sizing: border-box !important; display: block !important;
+    }
+    /* 1. 標題、影片名與影片日期全部變成乾燥玫瑰深粉 */
+    #yt-content h2,
+    #yt-content .video-title,
+    #yt-content .video-date,
+    #yt-content .yt-date {
+        color: #b87070 !important;
+    }
+    #yt-content h2 {
+        font-size: 24px !important; margin-top: 0 !important; margin-bottom: 20px !important; text-align: center !important; font-weight: bold !important;
+    }
+    /* 2. 徹底隱藏左上角長方體 */
+    #yt-content .card::before,
+    #yt-content .dot,
+    #yt-content .circle { 
+        display: none !important; 
+    }
+</style>
+    <div class="card">
+        <h2>MV</h2>
+        <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
+            <a href="https://www.youtube.com/watch?v=aLBo0oJqBXI" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+                <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                    <img src="https://img.youtube.com/vi/aLBo0oJqBXI/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+                </div>
+                <div class="video-info">
+                    <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - FORMULA</div>
+                    <div class="video-date">2025.12.02</div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=P8VVnopM610" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+                <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                    <img src="https://img.youtube.com/vi/P8VVnopM610/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+                </div>
+                <div class="video-info">
+                    <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - FREAK ALARM</div>
+                    <div class="video-date">2026.01.12</div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=cBfYIb1w1iw" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+                <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                    <img src="https://img.youtube.com/vi/cBfYIb1w1iw/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+                </div>
+                <div class="video-info">
+                    <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - OMG!</div>
+                    <div class="video-date">2026.05.26</div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=ujv1XDx1Fgg" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+                <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                    <img src="https://img.youtube.com/vi/ujv1XDx1Fgg/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+                </div>
+                <div class="video-info">
+                    <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - GO!GO!</div>
+                    <div class="video-date">2026.06.26</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>OFFICIAL AUDIO</h2>
+        <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
+            <a href="https://www.youtube.com/watch?v=RmN-N_v-y6U" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+                <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                    <img src="https://img.youtube.com/vi/RmN-N_v-y6U/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+                </div>
+                <div class="video-info">
+                    <div class="video-title" style="color: var(--text-color);">FORMULA</div>
+                    <div class="video-date">2025.12.03</div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=sswr-7fPU3c" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+                <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                    <img src="https://img.youtube.com/vi/sswr-7fPU3c/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+                </div>
+                <div class="video-info">
+                    <div class="video-title" style="color: var(--text-color);">FREAK ALARM</div>
+                    <div class="video-date">2026.01.12</div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=rjiIOZCpbx4" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+                <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                    <img src="https://img.youtube.com/vi/rjiIOZCpbx4/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+                </div>
+                <div class="video-info">
+                    <div class="video-title" style="color: var(--text-color);">Raw Flame</div>
+                    <div class="video-date">2026.01.12</div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=JXD8tm38eTw" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+                <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                    <img src="https://img.youtube.com/vi/JXD8tm38eTw/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+                </div>
+                <div class="video-info">
+                    <div class="video-title" style="color: var(--text-color);">Chains</div>
+                    <div class="video-date">2026.01.12</div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=XJ4XrrsnmuM" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+                <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                    <img src="https://img.youtube.com/vi/XJ4XrrsnmuM/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+                </div>
+                <div class="video-info">
+                    <div class="video-title" style="color: var(--text-color);">Never Been 2 Heaven</div>
+                    <div class="video-date">2026.01.12</div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=houY-xCpqoQ" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+                <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                    <img src="https://img.youtube.com/vi/houY-xCpqoQ/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+                </div>
+                <div class="video-info">
+                    <div class="video-title" style="color: var(--text-color);">Cinnamon Shake</div>
+                    <div class="video-date">2026.01.12</div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=GLDJ_C5sbjQ" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+                <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                    <img src="https://img.youtube.com/vi/GLDJ_C5sbjQ/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+                </div>
+                <div class="video-info">
+                    <div class="video-title" style="color: var(--text-color);">OMG!</div>
+                    <div class="video-date">2026.05.26</div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=Pi2r_pewZbI" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+                <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                    <img src="https://img.youtube.com/vi/Pi2r_pewZbI/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+                </div>
+                <div class="video-info">
+                    <div class="video-title" style="color: var(--text-color);">Good Life</div>
+                    <div class="video-date">2026.05.26</div>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=y6OLdK2yKKw" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+                <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                    <img src="https://img.youtube.com/vi/y6OLdK2yKKw/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+                </div>
+                <div class="video-info">
+                    <div class="video-title" style="color: var(--text-color);">GO!GO Agent Kim Reactivated OST</div>
+                    <div class="video-date">2026.06.26</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+<div class="card">
+    <h2>Untitled</h2>
+    <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
+        <a href="https://www.youtube.com/watch?v=TC6G1Mcp-_I" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/TC6G1Mcp-_I/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_01 (2025 MAMA AWARDS VCR Shooting & Rehearsal).ald1</div>
+                <div class="video-date">2025.12.17</div>
+                </div>
+            </a>
+
+                    <a href="https://www.youtube.com/watch?v=KMaGWSBtLoA" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/KMaGWSBtLoA/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_02 (Packing and Off to 2025 MAMA AWARDS).ald1</div>
+                <div class="video-date">2026.01.01</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=AOPAx58qCo4" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/AOPAx58qCo4/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_03 (2025 MAMA AWARDS Practice & Stage).ald1</div>
+                <div class="video-date">2026.01.05</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=raYvopk9rxU" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/raYvopk9rxU/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_04 (MMA 2025 Practice & Stage).ald1</div>
+                <div class="video-date">2026.01.10</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=1k-ygAaMwmc" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/1k-ygAaMwmc/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_05 (DON'T LXXK UP Shooting).ald1</div>
+                <div class="video-date">2026.01.18</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=uA19W_-oxPA" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/uA19W_-oxPA/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_06 (Madame FIGARO Hong Kong  Magazine Shooting).ald1</div>
+                <div class="video-date">日2026.02.01</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=qb2mHj18Po0" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/qb2mHj18Po0/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_07 (Thoughts on Our First Week of Debut).ald1</div>
+                <div class="video-date">2026.02.06</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=2kLm313lplA" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/2kLm313lplA/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Utitled_08 (Debut Show  THE FIRST ALARM  Practice).ald1</div>
+                <div class="video-date">206.02.25</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=3JVKGMtP3SQ" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/3JVKGMtP3SQ/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_09 (Debut Show Practice & Stage).ald1</div>
+                <div class="video-date">2026.02.28</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=lqU4g7bdGUg" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/lqU4g7bdGUg/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_10 (Debut Showcase).ald1</div>
+                <div class="video-date">2026.03.07</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=5YgyloZK4a4" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/5YgyloZK4a4/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_11 (FREAK ALARM  MV Unreleased Cut).ald1</div>
+                <div class="video-date">2026.03.10</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=uz5y1GtzNTI" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/uz5y1GtzNTI/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_12 (DAZED KOREA x Miu Miu Magazine Shoot & Manifeste Pop-Up).ald1</div>
+                <div class="video-date">2026.03.15</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=jD4nEBz8x4M" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/jD4nEBz8x4M/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_13 ('EUPHORIA' Debut Week).ald1</div>
+                <div class="video-date">2026.03.31</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=reCRbHmJ3L4" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/reCRbHmJ3L4/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_14 (ELLE FRESH Magazine Shoot).ald1</div>
+                <div class="video-date">2026.04.06</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=9yGYgS2bR3g" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/9yGYgS2bR3g/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_15 (TEUMSAE RAMYUN AD Shoot).ald1</div>
+                <div class="video-date">206.04.07</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=udo7szVfwuU" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/udo7szVfwuU/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_16 (Allure x MONTBLANC Shoot & Amazing Thursday & THAT'S A NO NO Challenge).ald1</div>
+                <div class="video-date">2026.04.15</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=cNjA8oyA7Jg" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/cNjA8oyA7Jg/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_17 (Blind Box Opening & MS. GEE COLLECTION 2026 F/W & Chinese Recording).ald1</div>
+                <div class="video-date">2026.05.15</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=ebCK8EY2b4I" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/ebCK8EY2b4I/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_18 (Beijing Promotion & Thank You Challenge).ald1</div>
+                <div class="video-date">2026.05.25</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=FliIZc0CM7k" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/FliIZc0CM7k/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_19 (KCON JAPAN 2026 Practice & Day1,2).ald1</div>
+                <div class="video-date">2026.06.02</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=NQ3hEaP-7W4" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/NQ3hEaP-7W4/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_20 (W Shoot & Butterbear & Lee Mujin Service).ald1</div>
+                <div class="video-date">2026.06.17</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=B3pao2eH5z0" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/B3pao2eH5z0/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_21 (No School Tomorrow Jacket & OMG! MV Shoot).ald1</div>
+                <div class="video-date">2026.06.19</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=k0ZCeCrN-6c" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/k0ZCeCrN-6c/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_22 (Our First University Festival).ald1</div>
+                <div class="video-date">2026.06.22</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=yXTPedMs2cM" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/yXTPedMs2cM/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_23 (2026 ANNYEONG BANGKOK Music Festival & DOUBLE LOVERS AD Shoot).ald1</div>
+                <div class="video-date">2026.07.05</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=kXqKmz_dYss" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/kXqKmz_dYss/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_24 (Allure Korea & MAPS JAPAN x BAPE Magazine Shoot).ald1</div>
+                <div class="video-date">206.07.08</div>
+            </div>
+        </a>
+
+        </div>
+    </div>
+
+<div class="card">
+    <h2>ONE DREAM FOREVER</h2>
+    <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
+        <a href="https://www.youtube.com/watch?v=IFEZWrbqNQ8" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/IFEZWrbqNQ8/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);"> ONE DREAM FOREVER EP.1</div>
+                <div class="video-date">2025.10.16</div>
+                </div>
+            </a>
+
+                    <a href="https://www.youtube.com/watch?v=zSDMcCmCRzw" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/zSDMcCmCRzw/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ONE DREAM FOREVER EP.2</div>
+                <div class="video-date">2025.10.23</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=NixPme3dN98" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/NixPme3dN98/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ONE DREAM FOREVER EP.3</div>
+                <div class="video-date">2025.10.30</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=cOSAoW7hIV0" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/cOSAoW7hIV0/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ONE DREAM FOREVER EP.4</div>
+                <div class="video-date">2025.11.06</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=aX7WQF4hqzk" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/aX7WQF4hqzk/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);"> ONE DREAM FOREVER EP.5</div>
+                <div class="video-date">2025.11.18</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=BZuZSm9Jie4" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/BZuZSm9Jie4/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ONE DREAM FOREVER EP.6</div>
+                <div class="video-date">2025.11.21</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=EYSIY68jjZQ" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/EYSIY68jjZQ/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ONE DREAM FOREVER EP.7</div>
+                <div class="video-date">2026.11.25</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=BmYsctTzA6c" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/BmYsctTzA6c/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ONE DREAM FOREVER EP.8</div>
+                <div class="video-date">2025.11.27</div>
+            </div>
+        </a>
+
+        </div>
+    </div>
+
+<div class="card">
+    <h2>DRIVE TO</h2>
+    <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
+                    <a href="https://www.youtube.com/watch?v=C-u2u8SW8Sk" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/C-u2u8SW8Sk/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">[Vlog] 차이냥즈 코스로 모십니다🐱 | DRIVE TO SEOUL</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            ARNO、鑫隆、安信
+        </div>
+                <div class="video-date">2026.04.25</div>
+            </div>
+        </a>
+
+                 <a href="https://www.youtube.com/watch?v=D0eB-lPRqfk" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/D0eB-lPRqfk/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">[Vlog] 번개맨과 함께하는 충칭⚡️| DRIVE TO CHONGQING</div>
+                <div class="video-date">2026.05.11</div>
+            </div>
+        </a>
+
+        </div>
+    </div>
+
+</div>
+
+</div> <footer>©ald1.a1mem</footer>
+
+<style>
+    /* 1. 頂部按鈕預設外觀：網頁一打開就是膠囊圓形、拿掉黑框 */
+    .tab-buttons .tab-btn {
+        background-color: #f0f0f0 !important;
+        color: #666666 !important;
+        border-radius: 30px !important;  
+        border: none !important;          
+        padding: 10px 20px !important;
+        outline: none !important;
+        box-shadow: none !important;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        display: inline-block !important;
+    }
+
+    /* 2. 頂部按鈕點擊變色：倒數(經典藍)、舞台(棕)、節目(綠)、YT(乾燥玫瑰粉) */
+    .tab-buttons .tab-btn.active:nth-child(1) {
+        background-color: #5698c3 !important; /* 經典藍 */
+        color: #ffffff !important;
+    }
+    .tab-buttons .tab-btn.active:nth-child(2) {
+        background-color: #c48b59 !important; /* 復古焦糖暖棕 */
+        color: #ffffff !important;
+    }
+    .tab-buttons .tab-btn.active:nth-child(3) {
+        background-color: #5b8c76 !important; /* 迷霧森林深綠 */
+        color: #ffffff !important;
+    }
+    .tab-buttons .tab-btn.active:nth-child(4) {
+        background-color: #b87070 !important; /* 乾燥玫瑰粉 */
+        color: #ffffff !important;
+    }
+
+    /* 3. 強制隱藏底部任何可能的殘留樣式 */
+    .tab-content ~ .tab-buttons,
+    footer .tab-buttons {
+        display: none !important;
+    }
+</style>
+
+
+<script>
+    function showTab(tabId, element) {
+        // 1. 隱藏所有分頁內容
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.style.display = 'none';
+        });
+        
+        // 2. 顯示點選的分頁
+        const targetContent = document.getElementById(tabId);
+        if (targetContent) {
+            targetContent.style.display = 'block';
+        }
+        
+        // 3. 清除頂部按鈕列的所有 active 狀態
+        document.querySelectorAll('.tab-buttons .tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // 4. 幫當前被點選的按鈕掛上 active 標記，使其啟動顏色切換
+        if (element) {
+            element.classList.add('active');
+        }
+    }
+
+    // 網頁剛載入時的初始自動化防禦設定
+    document.addEventListener("DOMContentLoaded", function() {
+        // 預設將第一個「回歸倒數」分頁與按鈕點亮
+        const firstBtn = document.querySelector('.tab-buttons .tab-btn');
+        if (firstBtn) {
+            firstBtn.classList.add('active');
+        }
+        const firstContent = document.getElementById('countdown-content');
+        if (firstContent) {
+            firstContent.style.display = 'block';
+        }
+    });
+    </script>
+</body>
+</html>
