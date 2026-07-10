@@ -16,7 +16,7 @@
             --active-color: #427fa8;
         }
 
-        body {
+      body {
             font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
             color: var(--text-color);
             margin: 0;
@@ -28,19 +28,23 @@
             position: relative;
         }
 
-        /* 🌟 全新加入的背景圖片與暗化遮罩層 */
-        body::before {
+body::before {
             content: "";
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            /* 這裡設定你的背景圖片路徑，記得跟你的網頁檔案放在同一個資料夾 */
             background: url("image_7b53b9.jpg") center center / cover no-repeat;
-            /* 透過線性調色，直接疊上一層 70% 不透明度的黑色（30% 透明），把背景完美調暗 */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("image_7b53b9.jpg");
-            z-index: -1; /* 保證背景乖乖待在最底層，絕對不擋住卡片和按鈕 */
+            /* 調整為 0.5，背景會亮一點，不會死黑 */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("image_7b53b9.jpg");
+            z-index: -2; /* 往後退到更深的第一層 */
+        }
+
+        /* 🌟 全新補上：強迫網頁的所有主容器、分頁內容站到最前層，不被灰色遮罩蓋住 */
+        .container, .tab-buttons, .member-filter-bar, .tab-content {
+            position: relative;
+            z-index: 1; /* 確保站在遮罩的上面，按鈕和卡片就不會變灰 */
         }
         
 
@@ -52,11 +56,10 @@
         
         .brand-title {
             font-size: 2.6rem;
-            color: var(--main-color);
-            margin: 0;
+color: var(--main-color);
+            margin: 20px 0;
+            font-size: 2.5rem;
             font-weight: 700;
-            letter-spacing: 3px;
-            text-shadow: 2px 2px 0px #ffffff, 4px 4px 0px rgba(86, 152, 195, 0.15);
         }
 
         /* 網頁頂部 Tab 切換鍵按鈕列 */
