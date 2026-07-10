@@ -1609,7 +1609,7 @@
             targetContent.style.display = 'block';
         }
         
-        // 3. 清除所有分頁按鈕的 active 狀態
+        // 3. 徹底清除所有分頁按鈕的 active 狀態
         document.querySelectorAll('.tab-buttons .tab-btn').forEach(btn => {
             btn.classList.remove('active');
             btn.className = 'tab-btn'; 
@@ -1623,9 +1623,9 @@
         // 控制成員篩選列在哪些分頁才要顯示
         const filterBar = document.getElementById('member-filters');
         if (filterBar) {
-            if (tabId === 'stage-content' || tabId === 'variety-content') {
+            if (tabId === 'stage-content' || tabId === 'variety-content' || tabId === 'yt-content') {
                 filterBar.style.display = 'flex';
-                // 切換分頁時，重置成員篩選狀態為「全部」
+                // 切換分頁時，預設重置篩選狀態為「全部」
                 const allBtn = filterBar.querySelector('.member-btn');
                 filterMember('all', allBtn);
             } else {
@@ -1634,7 +1634,7 @@
         }
     }
 
-    // 篩選成員（最終修正版：不破壞原本的 flex 屬性）
+    // 篩選成員核心邏輯
     function filterMember(memberName, element) {
         // 1. 切換成員按鈕的 active 狀態
         document.querySelectorAll('#member-filters .member-btn').forEach(btn => {
@@ -1644,8 +1644,14 @@
             element.classList.add('active');
         }
 
-        // 2. 找到當前開啟的分頁
-        const activeContent = document.querySelector('.tab-content[style*="display: block"]');
+        // 2. 準確找到當前點開的那個分頁
+        const tabContents = document.querySelectorAll('.tab-content');
+        let activeContent = null;
+        tabContents.forEach(content => {
+            if (content.style.display === 'block') {
+                activeContent = content;
+            }
+        });
         if (!activeContent) return;
 
         // 3. 抓出這個分頁裡所有的「大卡片 (.card)」
@@ -1653,33 +1659,34 @@
 
         bigCards.forEach(bigCard => {
             if (memberName === 'all') {
-                // 如果是「全部」，直接移除隱藏設定，恢復 HTML 原本的樣子
-                bigCard.style.display = 'block';
+                // 如果是「全部」，大卡片和裡面所有影片一律解除隱藏
+                bigCard.style.setProperty('display', 'block', 'important');
                 bigCard.querySelectorAll('.video-card').forEach(vCard => {
                     vCard.style.removeProperty('display');
                 });
             } else {
-                // 如果是特定成員，抓出大卡片裡面所有影片卡片
+                // 如果是特定成員，檢查大卡片裡面所有的影片
                 const videoCards = bigCard.querySelectorAll('.video-card');
                 let matchCount = 0; 
 
                 videoCards.forEach(vCard => {
-                    // 抓取影片內的所有文字（包含成員名字）
+                    // 抓取影片卡片裡的所有文字（包含成員名字）
                     const videoText = (vCard.textContent || '') + (vCard.innerText || '');
                     
                     if (videoText.includes(memberName)) {
-                        vCard.style.removeProperty('display'); // 符合就恢復顯示（不破壞原本排版）
+                        vCard.style.removeProperty('display'); // 包含成員就顯示
                         matchCount++; 
                     } else {
-                        vCard.style.setProperty('display', 'none', 'important'); // 不符合就強行隱藏
+                        // 🌟 這裡！就是這裡！這次絕對幫你死死加上強制隱藏不符合影片的指令！
+                        vCard.style.setProperty('display', 'none', 'important'); 
                     }
                 });
 
-                // 如果這張大卡片裡符合的影片數量是 0，就把整張大卡片 (.card) 徹底隱藏
+                // 如果這張大卡片裡符合的影片數量是 0，就把整張大卡片徹底隱藏
                 if (matchCount > 0) {
-                    bigCard.style.display = 'block'; 
+                    bigCard.style.setProperty('display', 'block', 'important'); 
                 } else {
-                    bigCard.style.display = 'none';  
+                    bigCard.style.setProperty('display', 'none', 'important');  
                 }
             }
         });
@@ -1687,7 +1694,6 @@
 
     // 網頁初始自動化設定
     document.addEventListener("DOMContentLoaded", function() {
-        // 預設點亮第一個「回歸倒數」分頁
         const firstBtn = document.querySelector('#main-top-tabs .tab-btn');
         if (firstBtn) {
             firstBtn.classList.add('active');
