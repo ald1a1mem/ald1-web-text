@@ -1501,25 +1501,24 @@
         </div>
     </div>
 
-    <h2>Vlog</h2>
-    <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
-        <a href="https://www.youtube.com/watch?v=eztcy_030TM" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
-            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
-                <img src="https://img.youtube.com/vi/eztcy_030TM/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
-            </div>
-            <div class="video-info">
-                <div class="video-title" style="color: var(--text-color);">[VLOG] ALPHA公司新實習生 vlog💼</div>
-        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
-            相炫
+<h2>Vlog</h2>
+<div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
+    
+    <a href="https://www.youtube.com/watch?v=eztcy_030TM" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+        <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+            <img src="https://img.youtube.com/vi/eztcy_030TM/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
         </div>
-                <div class="video-date">2026.01.13</div>
-                </div>
-            </a>
+        <div class="video-info">
+            <div class="video-title" style="color: var(--text-color);">[VLOG] ALPHA公司新實習生 vlog💼</div>
+            <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+                相炫
+            </div>
+            <div class="video-date">2026.01.13</div>
+              </div>
+        </a>
 
         </div>
     </div>
-
-</div>
 
 </div> <footer>©ald1.a1mem</footer>
 
@@ -1599,9 +1598,6 @@
 
 
 <script>
-    // 儲存當前選擇的成員，預設為全部
-    let currentMember = 'all';
-
     function showTab(tabId, element) {
         // 1. 隱藏所有分頁內容
         document.querySelectorAll('.tab-content').forEach(content => {
@@ -1614,35 +1610,34 @@
             targetContent.style.display = 'block';
         }
         
-        // 3. 清除頂部分頁按鈕的所有 active 狀態
-        document.querySelectorAll('#main-top-tabs .tab-btn').forEach(btn => {
+        // 3. 徹底清除所有分頁按鈕的 active 狀態（解決多個按鈕同時亮燈的問題）
+        document.querySelectorAll('.tab-buttons .tab-btn').forEach(btn => {
             btn.classList.remove('active');
+            btn.className = 'tab-btn'; // 強制重置 class，確保舊顏色完全褪去
         });
         
-        // 4. 幫當前被點選的分頁按鈕掛上 active
+        // 4. 只幫當前被點選的這個按鈕掛上 active 亮燈
         if (element) {
             element.classList.add('active');
         }
 
-        // 🌟 核心邏輯：控制「成員篩選列」在哪些分頁才要顯示
+        // 控制成員篩選列在哪些分頁才要顯示
         const filterBar = document.getElementById('member-filters');
         if (filterBar) {
             if (tabId === 'stage-content' || tabId === 'variety-content') {
-                filterBar.style.display = 'flex'; // 在分頁二和分頁三顯示
-                // 切換分頁時，重置篩選狀態為「全部」
+                filterBar.style.display = 'flex';
+                // 切換分頁時，重置成員篩選狀態為「全部」
                 const allBtn = filterBar.querySelector('.member-btn');
                 filterMember('all', allBtn);
             } else {
-                filterBar.style.display = 'none'; // 其他分頁隱藏
+                filterBar.style.display = 'none';
             }
         }
     }
 
-    // 🌟 核心邏輯：自動判斷並篩選卡片成員
+    // 篩選成員：連同大卡片 (.card) 一起判斷與隱藏
     function filterMember(memberName, element) {
-        currentMember = memberName;
-
-        // 1. 切換成員按鈕的亮起狀態 (active)
+        // 1. 切換成員按鈕的 active 狀態
         document.querySelectorAll('#member-filters .member-btn').forEach(btn => {
             btn.classList.remove('active');
         });
@@ -1650,32 +1645,46 @@
             element.classList.add('active');
         }
 
-        // 2. 抓出當前可見分頁裡面的所有影片卡片 (video-card)
-        // 這樣可以確保舞台頁只篩選舞台影片，節目頁只篩選節目影片，互不干涉
+        // 2. 找到當前開啟的分頁
         const activeContent = document.querySelector('.tab-content[style*="display: block"]');
         if (!activeContent) return;
 
-        const cards = activeContent.querySelectorAll('.video-card');
+        // 3. 抓出這個分頁裡所有的「大卡片 (.card)」來檢查
+        const bigCards = activeContent.querySelectorAll('.card');
 
-        cards.forEach(card => {
+        bigCards.forEach(bigCard => {
             if (memberName === 'all') {
-                // 如果選「全部」，卡片一律顯示
-                card.style.display = 'block';
+                // 如果是「全部」，大卡片和裡面的所有影片通通顯示
+                bigCard.style.display = 'block';
+                bigCard.querySelectorAll('.video-card').forEach(vCard => {
+                    vCard.style.display = 'block';
+                });
             } else {
-                // 讀取卡片內「所有文字內容」（包含你的成員標籤文字）
-                const cardText = card.textContent || card.innerText;
-                
-                // 自動判斷卡片文字裡有沒有包含這個成員的名字
-                if (cardText.includes(memberName)) {
-                    card.style.display = 'block'; // 包含就顯示
+                // 如果是特定成員，先去檢查這張大卡片裡面「有哪些影片包含該成員」
+                const videoCards = bigCard.querySelectorAll('.video-card');
+                let matchCount = 0; 
+
+                videoCards.forEach(vCard => {
+                    const videoText = vCard.textContent || vCard.innerText;
+                    if (videoText.includes(memberName)) {
+                        vCard.style.display = 'block'; 
+                        matchCount++; 
+                    } else {
+                        vCard.style.display = 'none';  
+                    }
+                });
+
+                // 如果這張大卡片裡符合的影片數量是 0，就把整張大卡片藏起來
+                if (matchCount > 0) {
+                    bigCard.style.display = 'block'; 
                 } else {
-                    card.style.display = 'none';  // 不包含就隱藏
+                    bigCard.style.display = 'none';  
                 }
             }
         });
     }
 
-    // 網頁剛載入時的初始自動化設定
+    // 網頁初始自動化設定
     document.addEventListener("DOMContentLoaded", function() {
         // 預設點亮第一個「回歸倒數」分頁
         const firstBtn = document.querySelector('#main-top-tabs .tab-btn');
