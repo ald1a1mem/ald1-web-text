@@ -16,7 +16,7 @@
             --active-color: #427fa8;
         }
 
-      body {
+body {
             font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
             color: var(--text-color);
             margin: 0;
@@ -36,17 +36,18 @@ body::before {
             width: 100%;
             height: 100%;
             background: url("image_7b53b9.jpg") center center / cover no-repeat;
-            /* 調整為 0.5，背景會亮一點，不會死黑 */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("image_7b53b9.jpg");
-            z-index: -2; /* 往後退到更深的第一層 */
+            opacity: 0.3; /* 透明度調成 70%，保留 30% 的顯現度 */
+            z-index: -1;  /* 乖乖待在最底層 */
         }
 
-        /* 🌟 全新補上：強迫網頁的所有主容器、分頁內容站到最前層，不被灰色遮罩蓋住 */
-        .container, .tab-buttons, .member-filter-bar, .tab-content {
-            position: relative;
-            z-index: 1; /* 確保站在遮罩的上面，按鈕和卡片就不會變灰 */
+        /* 🌟 標題文字：維持原本藍色，並加上質感的黑色陰影 */
+        h1 {
+            color: var(--main-color);
+            margin: 20px 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* 👈 這裡換成了淡淡的半透明黑色陰影 */
         }
-        
 
         /* 網頁頂部標頭 */
         .brand-header {
