@@ -18,7 +18,6 @@
 
         body {
             font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
-            background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
             padding: 0;
@@ -26,7 +25,24 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            position: relative;
         }
+
+        /* 🌟 全新加入的背景圖片與暗化遮罩層 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* 這裡設定你的背景圖片路徑，記得跟你的網頁檔案放在同一個資料夾 */
+            background: url("image_7b53b9.jpg") center center / cover no-repeat;
+            /* 透過線性調色，直接疊上一層 70% 不透明度的黑色（30% 透明），把背景完美調暗 */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("image_7b53b9.jpg");
+            z-index: -1; /* 保證背景乖乖待在最底層，絕對不擋住卡片和按鈕 */
+        }
+        
 
         /* 網頁頂部標頭 */
         .brand-header {
