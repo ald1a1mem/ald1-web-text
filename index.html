@@ -1514,11 +1514,10 @@
                 相炫
             </div>
             <div class="video-date">2026.01.13</div>
-              </div>
-        </a>
-
         </div>
-    </div>
+    </a>
+
+</div>
 
 </div> <footer>©ald1.a1mem</footer>
 
@@ -1610,13 +1609,13 @@
             targetContent.style.display = 'block';
         }
         
-        // 3. 徹底清除所有分頁按鈕的 active 狀態（解決多個按鈕同時亮燈的問題）
+        // 3. 清除所有分頁按鈕的 active 狀態
         document.querySelectorAll('.tab-buttons .tab-btn').forEach(btn => {
             btn.classList.remove('active');
-            btn.className = 'tab-btn'; // 強制重置 class，確保舊顏色完全褪去
+            btn.className = 'tab-btn'; 
         });
         
-        // 4. 只幫當前被點選的這個按鈕掛上 active 亮燈
+        // 4. 幫當前被點選的分頁按鈕掛上 active
         if (element) {
             element.classList.add('active');
         }
@@ -1635,7 +1634,7 @@
         }
     }
 
-    // 篩選成員：連同大卡片 (.card) 一起判斷與隱藏
+    // 篩選成員（全面升級版：支援 a 標籤與各式卡片結構）
     function filterMember(memberName, element) {
         // 1. 切換成員按鈕的 active 狀態
         document.querySelectorAll('#member-filters .member-btn').forEach(btn => {
@@ -1649,32 +1648,38 @@
         const activeContent = document.querySelector('.tab-content[style*="display: block"]');
         if (!activeContent) return;
 
-        // 3. 抓出這個分頁裡所有的「大卡片 (.card)」來檢查
+        // 3. 抓出這個分頁裡所有的「大卡片 (.card)」
         const bigCards = activeContent.querySelectorAll('.card');
 
         bigCards.forEach(bigCard => {
             if (memberName === 'all') {
-                // 如果是「全部」，大卡片和裡面的所有影片通通顯示
+                // 如果是「全部」，大卡片和裡面所有影片一律正常顯示
                 bigCard.style.display = 'block';
                 bigCard.querySelectorAll('.video-card').forEach(vCard => {
                     vCard.style.display = 'block';
                 });
             } else {
-                // 如果是特定成員，先去檢查這張大卡片裡面「有哪些影片包含該成員」
+                // 如果是特定成員，抓出大卡片裡面所有類型的影片卡片
                 const videoCards = bigCard.querySelectorAll('.video-card');
                 let matchCount = 0; 
 
                 videoCards.forEach(vCard => {
-                    const videoText = vCard.textContent || vCard.innerText;
+                    // 同時讀取 textContent 和 innerText，確保 a 標籤或 div 內的文字都能被強制抓到
+                    const videoText = (vCard.textContent || '') + (vCard.innerText || '');
+                    
                     if (videoText.includes(memberName)) {
-                        vCard.style.display = 'block'; 
+                        vCard.style.removeAttribute ? vCard.style.removeAttribute('display') : vCard.style.display = 'block';
+                        // 針對帶有 flex 屬性的 Vlog 卡片做特殊顯示處理，防止結構跑掉
+                        if (vCard.style.flex) {
+                            vCard.style.display = 'block';
+                        }
                         matchCount++; 
                     } else {
-                        vCard.style.display = 'none';  
+                        vCard.style.setProperty('display', 'none', 'important'); // 強制隱藏不符合的影片
                     }
                 });
 
-                // 如果這張大卡片裡符合的影片數量是 0，就把整張大卡片藏起來
+                // 如果這張大卡片裡符合的影片數量是 0，就把整張大卡片 (.card) 徹底隱藏
                 if (matchCount > 0) {
                     bigCard.style.display = 'block'; 
                 } else {
@@ -1697,5 +1702,6 @@
         }
     });
     </script>
+
 </body>
 </html>
