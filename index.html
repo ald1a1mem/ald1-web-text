@@ -1500,23 +1500,23 @@
 
         </div>
     </div>
-
-<h2>Vlog</h2>
-<div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
-    
-    <a href="https://www.youtube.com/watch?v=eztcy_030TM" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
-        <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
-            <img src="https://img.youtube.com/vi/eztcy_030TM/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
-        </div>
-        <div class="video-info">
-            <div class="video-title" style="color: var(--text-color);">[VLOG] ALPHA公司新實習生 vlog💼</div>
-            <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
-                相炫
+<div class="card">
+    <h2>Vlog</h2>
+    <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
+        <a href="https://www.youtube.com/watch?v=eztcy_030TM" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/eztcy_030TM/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
             </div>
-            <div class="video-date">2026.01.13</div>
-        </div>
-    </a>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">[VLOG] ALPHA公司新實習生 vlog💼</div>
+                <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+                    相炫
+                </div>
+                <div class="video-date">2026.01.13</div>
+            </div>
+        </a>
 
+    </div>
 </div>
 
 </div> <footer>©ald1.a1mem</footer>
@@ -1634,7 +1634,7 @@
         }
     }
 
-    // 篩選成員（全面升級版：支援 a 標籤與各式卡片結構）
+    // 篩選成員（最終修正版：不破壞原本的 flex 屬性）
     function filterMember(memberName, element) {
         // 1. 切換成員按鈕的 active 狀態
         document.querySelectorAll('#member-filters .member-btn').forEach(btn => {
@@ -1653,29 +1653,25 @@
 
         bigCards.forEach(bigCard => {
             if (memberName === 'all') {
-                // 如果是「全部」，大卡片和裡面所有影片一律正常顯示
+                // 如果是「全部」，直接移除隱藏設定，恢復 HTML 原本的樣子
                 bigCard.style.display = 'block';
                 bigCard.querySelectorAll('.video-card').forEach(vCard => {
-                    vCard.style.display = 'block';
+                    vCard.style.removeProperty('display');
                 });
             } else {
-                // 如果是特定成員，抓出大卡片裡面所有類型的影片卡片
+                // 如果是特定成員，抓出大卡片裡面所有影片卡片
                 const videoCards = bigCard.querySelectorAll('.video-card');
                 let matchCount = 0; 
 
                 videoCards.forEach(vCard => {
-                    // 同時讀取 textContent 和 innerText，確保 a 標籤或 div 內的文字都能被強制抓到
+                    // 抓取影片內的所有文字（包含成員名字）
                     const videoText = (vCard.textContent || '') + (vCard.innerText || '');
                     
                     if (videoText.includes(memberName)) {
-                        vCard.style.removeAttribute ? vCard.style.removeAttribute('display') : vCard.style.display = 'block';
-                        // 針對帶有 flex 屬性的 Vlog 卡片做特殊顯示處理，防止結構跑掉
-                        if (vCard.style.flex) {
-                            vCard.style.display = 'block';
-                        }
+                        vCard.style.removeProperty('display'); // 符合就恢復顯示（不破壞原本排版）
                         matchCount++; 
                     } else {
-                        vCard.style.setProperty('display', 'none', 'important'); // 強制隱藏不符合的影片
+                        vCard.style.setProperty('display', 'none', 'important'); // 不符合就強行隱藏
                     }
                 });
 
