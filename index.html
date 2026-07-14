@@ -16,8 +16,9 @@
             --active-color: #427fa8;
         }
 
-body {
+        body {
             font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
             padding: 0;
@@ -25,28 +26,6 @@ body {
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            position: relative;
-        }
-
-body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("image_7b53b9.jpg") center center / cover no-repeat;
-            opacity: 0.3; /* 透明度調成 70%，保留 30% 的顯現度 */
-            z-index: -1;  /* 乖乖待在最底層 */
-        }
-
-        /* 🌟 標題文字：維持原本藍色，並加上質感的黑色陰影 */
-        h1 {
-            color: var(--main-color);
-            margin: 20px 0;
-            font-size: 2.5rem;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* 👈 這裡換成了淡淡的半透明黑色陰影 */
         }
 
         /* 網頁頂部標頭 */
@@ -57,10 +36,11 @@ body::before {
         
         .brand-title {
             font-size: 2.6rem;
-color: var(--main-color);
-            margin: 20px 0;
-            font-size: 2.5rem;
+            color: var(--main-color);
+            margin: 0;
             font-weight: 700;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 0px #ffffff, 4px 4px 0px rgba(86, 152, 195, 0.15);
         }
 
         /* 網頁頂部 Tab 切換鍵按鈕列 */
@@ -881,7 +861,8 @@ color: var(--main-color);
         display: none !important; 
     }
 </style>
-    <div class="card">
+
+<div class="card">
         <h2>MV</h2>
         <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
             <a href="https://www.youtube.com/watch?v=aLBo0oJqBXI" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
@@ -1253,6 +1234,16 @@ color: var(--main-color);
             </div>
         </a>
 
+                    <a href="https://www.youtube.com/watch?v=mEd86rjYPmo" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/mEd86rjYPmo/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Untitled_25 (The Performance Practice Stage & MBC Radio CHIN CHIN BANG DJ).ald1</div>
+                <div class="video-date">2026.07.10</div>
+            </div>
+        </a>
+
         </div>
     </div>
 
@@ -1520,6 +1511,244 @@ color: var(--main-color);
 
         </div>
     </div>
+
+<div class="card">
+    <h2>Behind the DRIVE</h2>
+    <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
+        <a href="https://www.youtube.com/watch?v=PMpcdBeKpc4" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/PMpcdBeKpc4/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">[Behind the DRIVE] The birth of ALPHA DRIVE ONE 🎉</div>
+                <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+                    全員
+                </div>
+                <div class="video-date">2025.09.28</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=PMpcdBeKpc4" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/PMpcdBeKpc4/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">[Behind the DRIVE] Get Ready With 생크림 🎂</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            全員
+        </div>
+                <div class="video-date">2025.10.02</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=Edc2bC-mZYs" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/Edc2bC-mZYs/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Introducing ALPHA DRIVE ONE’s Signature</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            俊抒
+        </div>
+                <div class="video-date">2025.10.08</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=DGipnaSWy6A" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/DGipnaSWy6A/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Introducing ALPHA DRIVE ONE’s Signature</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            ARNO
+        </div>
+                <div class="video-date">2025.10.08</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=KjSbAeeGhpI" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/KjSbAeeGhpI/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Introducing ALPHA DRIVE ONE’s Signature</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            LEO
+        </div>
+                <div class="video-date">2025.10.08</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=hPS-WQFS4UI" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/hPS-WQFS4UI/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Introducing ALPHA DRIVE ONE’s Signature</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            虔佑
+        </div>
+                <div class="video-date">2025.10.08</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=3c6DxXmC3KI" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/3c6DxXmC3KI/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Introducing ALPHA DRIVE ONE’s Signature</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            相沅
+        </div>
+                <div class="video-date">2025.10.08</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=7OsPcBKmOBk" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/7OsPcBKmOBk/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Introducing ALPHA DRIVE ONE’s Signature</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            鑫隆
+        </div>
+                <div class="video-date">2025.10.08</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=Fcuaaxi_a_g" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/Fcuaaxi_a_g/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Introducing ALPHA DRIVE ONE’s Signature</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            安信
+        </div>
+                <div class="video-date">2025.10.08</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=0YJbetOFhYc" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/0YJbetOFhYc/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">Introducing ALPHA DRIVE ONE’s Signature</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            相炫
+        </div>
+                <div class="video-date">2025.10.08</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=uP02nbCs2J8" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/uP02nbCs2J8/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">[Behind the DRIVE] BOYS II PLANET 檔案展覽幕後</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            全員
+        </div>
+                <div class="video-date">2025.10.17</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=be8xPEcNeoU" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/be8xPEcNeoU/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">[Behind the DRIVE] 個人形象照拍攝</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            全員
+        </div>
+                <div class="video-date">2025.10.24</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=0cre7t3V1zA" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/0cre7t3V1zA/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">[Behind the DRIVE] ALD1og 拍攝幕後花絮</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            全員
+        </div>
+                <div class="video-date">2025.10.31</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=uiQDZiTBTmo" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/uiQDZiTBTmo/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">[Behind the DRIVE] FORMULA 拍攝幕後花絮</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            全員
+        </div>
+                <div class="video-date">2025.12.07</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=dlXrdVX3qAc" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/dlXrdVX3qAc/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">[Behind the DRIVE] BRINGGREEN 品牌大使幕後花絮</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            全員
+        </div>
+                <div class="video-date">2025.12.12</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=8uv_TzsuDXU" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/8uv_TzsuDXU/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">[Behind the DRIVE] 'EUPHORIA' Film by Raw Flame</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            全員
+        </div>
+                <div class="video-date">2025.12.22</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=YuE3PYh2UFo" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/YuE3PYh2UFo/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">[Behind the DRIVE] FORMULA 錄音室</div>
+        <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+            全員
+        </div>
+                <div class="video-date">2026.01.03</div>
+            </div>
+        </a>
+
+    </div>
+</div>
+
+<div class="card">
+    <h2>練習室</h2>
+    <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
+
+
+
+
+    </div>
+</div>
+
 <div class="card">
     <h2>Vlog</h2>
     <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
@@ -1535,6 +1764,52 @@ color: var(--main-color);
                 <div class="video-date">2026.01.13</div>
             </div>
         </a>
+
+    </div>
+</div>
+
+<div class="card">
+    <h2>ELSE</h2>
+    <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
+        <a href="https://www.youtube.com/watch?v=影片ID" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/影片ID/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">影片標題</div>
+                <div class="video-member" style="font-size: 12px; margin-bottom: 4px; font-weight: 500; display: block;">
+                    全員、俊抒、ARNO、LEO、虔佑、相沅、鑫隆、安信、相炫
+                </div>
+                <div class="video-date">日期</div>
+            </div>
+        </a>
+
+    </div>
+</div>
+
+<div class="card">
+    <h2>ALD1ary</h2>
+    <div class="video-grid" style="display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 15px; padding-bottom: 15px;">
+                    <a href="https://www.youtube.com/watch?v=CLlfsurQm8I" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/CLlfsurQm8I/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">[ALD1ary] ALD1 宿舍首次公開🏠</div>
+                <div class="video-date">2025.11.11</div>
+            </div>
+        </a>
+
+                    <a href="https://www.youtube.com/watch?v=bTGHLpu1E6g" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
+            <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
+                <img src="https://img.youtube.com/vi/bTGHLpu1E6g/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+            </div>
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">[ALD1ary] 今天我是廚師👨‍🍳</div>
+                <div class="video-date">2025.11.13</div>
+            </div>
+        </a>
+
 
     </div>
 </div>
@@ -1697,7 +1972,7 @@ color: var(--main-color);
                         vCard.style.removeProperty('display'); // 包含成員就顯示
                         matchCount++; 
                     } else {
-                        // 🌟 這裡！就是這裡！這次絕對幫你死死加上強制隱藏不符合影片的指令！
+                        // 強制隱藏不符合的影片
                         vCard.style.setProperty('display', 'none', 'important'); 
                     }
                 });
@@ -1712,8 +1987,45 @@ color: var(--main-color);
         });
     }
 
+    // 🌟 全新自動排序功能（依據影片日期由新到舊排序）
+    function sortAllVideos() {
+        // 找到網頁中所有裝影片的容器（.video-grid）
+        const videoGrids = document.querySelectorAll('.video-grid');
+
+        videoGrids.forEach(grid => {
+            // 抓出這個容器裡所有的影片卡片 (.video-card)
+            const cards = Array.from(grid.querySelectorAll('.video-card'));
+
+            // 開始比較日期進行排序
+            cards.sort((a, b) => {
+                const dateAEl = a.querySelector('.video-date');
+                const dateBEl = b.querySelector('.video-date');
+
+                // 如果卡片裡沒有寫日期，就先排到最後面
+                if (!dateAEl) return 1;
+                if (!dateBEl) return -1;
+
+                // 取得日期文字（例如 "2026.01.13"），把點號換成橫線 "2026-01-13" 方便程式辨識
+                const dateA = new Date(dateAEl.textContent.trim().replace(/\./g, '-'));
+                const dateB = new Date(dateBEl.textContent.trim().replace(/\./g, '-'));
+
+                // 由新到舊排序 (B 減 A)
+                return dateB - dateA;
+            });
+
+            // 依據排序好的順序，重新放回網頁畫面上
+            cards.forEach(card => {
+                grid.appendChild(card);
+            });
+        });
+    }
+
     // 網頁初始自動化設定
     document.addEventListener("DOMContentLoaded", function() {
+        // 🌟 載入時自動執行由新到舊排序
+        sortAllVideos();
+
+        // 預設點亮第一個「回歸倒數」分頁
         const firstBtn = document.querySelector('#main-top-tabs .tab-btn');
         if (firstBtn) {
             firstBtn.classList.add('active');
