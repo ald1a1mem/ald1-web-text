@@ -2689,10 +2689,10 @@
             content.style.display = 'none';
         });
         
-        // 2. 顯示點選的分頁
+        // 2. 顯示點選的分頁（這裡改回 'flex'，確保大區塊是一行一行整齊排列的）
         const targetContent = document.getElementById(tabId);
         if (targetContent) {
-            targetContent.style.display = 'block';
+            targetContent.style.display = 'flex';
         }
         
         // 3. 徹底清除所有分頁按鈕的 active 狀態
@@ -2730,30 +2730,25 @@
             element.classList.add('active');
         }
 
-        // 2. 準確找到當前點開的那個分頁
+        // 2. 準確找到當前點開的那個分頁（配合上面，這裡改為檢查 'flex'）
         const tabContents = document.querySelectorAll('.tab-content');
         let activeContent = null;
         tabContents.forEach(content => {
-            if (content.style.display === 'block') {
+            if (content.style.display === 'flex') {
                 activeContent = content;
             }
         });
         if (!activeContent) return;
 
-        // 3. 確保容器維持網格排版 (防止跑版)
-        const videoGrids = activeContent.querySelectorAll('.video-grid');
-        videoGrids.forEach(grid => {
-            grid.style.setProperty('display', 'grid', 'important');
-        });
-
-        // 4. 篩選卡片
+        // 3. 抓出這個分頁裡所有的「大卡片 (.card)」
         const bigCards = activeContent.querySelectorAll('.card');
+
         bigCards.forEach(bigCard => {
             if (memberName === 'all') {
-                // 如果是「全部」，大卡片和裡面所有影片一律解除隱藏
-                bigCard.style.setProperty('display', 'block', 'important');
+                // 如果是「全部」，大區塊和影片都移除自訂 display，直接還原 CSS 最漂亮的預設排版
+                bigCard.style.removeProperty('display');
                 bigCard.querySelectorAll('.video-card').forEach(vCard => {
-                    vCard.style.setProperty('display', 'block', 'important');
+                    vCard.style.removeProperty('display');
                 });
             } else {
                 // 如果是特定成員，檢查大卡片裡面所有的影片
@@ -2765,16 +2760,17 @@
                     const videoText = (vCard.textContent || '') + (vCard.innerText || '');
                     
                     if (videoText.includes(memberName)) {
-                        vCard.style.setProperty('display', 'block', 'important'); // 包含成員就顯示
+                        vCard.style.removeProperty('display'); // 🌟 移除自訂屬性，還原原本卡片排版
                         matchCount++; 
                     } else {
-                        vCard.style.setProperty('display', 'none', 'important'); // 不包含就隱藏
+                        // 強制隱藏不符合的影片
+                        vCard.style.setProperty('display', 'none', 'important'); 
                     }
                 });
 
                 // 如果這張大卡片裡符合的影片數量是 0，就把整張大卡片徹底隱藏
                 if (matchCount > 0) {
-                    bigCard.style.setProperty('display', 'block', 'important'); 
+                    bigCard.style.removeProperty('display'); // 🌟 還原大區塊原本一行一行的排版
                 } else {
                     bigCard.style.setProperty('display', 'none', 'important');  
                 }
@@ -2827,9 +2823,11 @@
         }
         const firstContent = document.getElementById('countdown-content');
         if (firstContent) {
-            firstContent.style.display = 'block';
+            // 🌟 預設第一個顯示的分頁也必須是 flex，確保大區塊一行一行排列
+            firstContent.style.display = 'flex';
         }
     });
 </script>
+
 </body>
 </html>
