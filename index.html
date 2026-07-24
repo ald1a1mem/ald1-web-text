@@ -339,43 +339,53 @@
         display: none !important;
     }
 
-    /* 標題與日程表文字變藍色 */
+    /* 標題與日程表文字變 #0f090b */
     #countdown-content h2, 
     #countdown-content h1,
     #countdown-content .schedule-title,
     #countdown-content .schedule-text,
-    #countdown-content .schedule-item {
+    #countdown-content .schedule-item,
+    #countdown-content .event-text {
         color: #0f090b !important;
     }
 
-    /* 日程表日期文字變藍色 */
-    #countdown-content .date-box {
-        background: transparent !important;
-        color: #0f090b !important;
-        border: none !important;
-    }
-
-    /* 迷你二輯小標籤變藍底 */
-    #countdown-content .album-badge {
+    /* 迷你二輯小標籤 (.status-badge) 變 #0f090b 底色 */
+    #countdown-content .status-badge {
         background-color: #0f090b !important;
         color: #ffffff !important;
     }
 
-    /* 倒數計時器大方塊變藍色背景 */
-    #countdown-content .countdown-timer > div,
-    #countdown-content .timer-box,
-    #countdown-content .countdown-box {
+    /* 倒數計時器方塊 (.time-box) 改為 #0f090b 背景 */
+    #countdown-content .time-box {
         background-color: #0f090b !important;
         border-radius: 20px !important; 
     }
 
     /* 計時器內部數字與英文死守白色 */
-    #countdown-content .countdown-timer div,
-    #countdown-content .countdown-timer span,
-    #countdown-content .timer-box span,
-    #countdown-content .countdown-box span {
+    #countdown-content .time-box span,
+    #countdown-content .time-num,
+    #countdown-content .time-label {
         color: #ffffff !important;
         display: inline-block;
+    }
+
+    /* 回歸日程表的項目外框改為 #0f090b 虛線 */
+    #countdown-content .schedule-list {
+        list-style: none;
+        padding: 0;
+    }
+    #countdown-content .schedule-item {
+        border: 2px dashed #0f090b !important;
+        border-radius: 15px;
+        padding: 10px 15px;
+        margin-bottom: 10px;
+    }
+
+    /* 日程表裡的日期文字 (08.24) 調整為乾淨的外觀 */
+    #countdown-content .date-text {
+        background: transparent !important;
+        color: #0f090b !important;
+        font-weight: bold;
     }
 </style>
 
