@@ -26,6 +26,12 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+
+           background-image: url('ald1_2.jfif.jfif');
+           background-size: contain;        /* 讓圖片完整顯示，不被強制裁切 */
+           background-position: center top;  /* 讓圖片靠上方或置中 */
+           background-repeat: no-repeat;
+           background-color: #0f090b;
         }
 
         /* 網頁頂部標頭 */
@@ -84,7 +90,7 @@
 
         /* 按鈕點擊變色設定（倒數藍、舞台棕、節目綠、YT粉） */
         .tab-buttons .tab-btn.active:nth-child(1) {
-            background-color: #5698c3 !important;
+            background-color: #0f090b !important;
             color: #ffffff !important;
             box-shadow: 0 4px 0px #427fa8 !important;
         }
@@ -388,19 +394,13 @@
             <div class="card">
                 <h2>回歸日程表</h2>
                 <ul class="schedule-list">
-                    <li class="schedule-item">
-                        <span class="date-text"> </span>
-                        <span class="event-text">  </span>
-                    </li>
-                    <li class="schedule-item">
-                        <span class="date-text"> </span>
-                        <span class="event-text">   </span>
-                    </li>
+
                     <li class="schedule-item">
                         <span class="date-text">08.24</span>
                         <span class="event-text"> MV </span>
                     </li>
                 </ul>
+
             </div>
         </div>
 
@@ -4942,7 +4942,7 @@ setInterval(function() {
 
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     document.getElementById("days").innerText = days;
