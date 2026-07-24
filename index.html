@@ -26,12 +26,11 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-
-           background-image: url('ald1_2.jfif.jfif');
-           background-size: contain;        /* 讓圖片完整顯示，不被強制裁切 */
-           background-position: center top;  /* 讓圖片靠上方或置中 */
-           background-repeat: no-repeat;
-           background-color: #0f090b;
+            background-image: url('ald1_2.jfif.jfif');
+            background-size: contain;         /* 讓圖片完整顯示，不被強制裁切 */
+            background-position: center top;  /* 讓圖片靠上方或置中 */
+            background-repeat: no-repeat;
+            background-color: #0f090b;
         }
 
         /* 網頁頂部標頭 */
@@ -42,11 +41,11 @@
         
         .brand-title {
             font-size: 2.6rem;
-            color: var(--main-color);
+            color: #638da3 !important; /* 改為指定的顏色 */
             margin: 0;
             font-weight: 700;
             letter-spacing: 3px;
-            text-shadow: 2px 2px 0px #ffffff, 4px 4px 0px rgba(86, 152, 195, 0.15);
+            text-shadow: 2px 2px 0px #ffffff, 4px 4px 0px rgba(99, 141, 163, 0.15);
         }
 
         /* 網頁頂部 Tab 切換鍵按鈕列 */
@@ -88,11 +87,11 @@
             box-shadow: 0 4px 0px var(--active-color);
         }
 
-        /* 按鈕點擊變色設定（倒數藍、舞台棕、節目綠、YT粉） */
+        /* 按鈕點擊變色設定（僅分頁 1 改為 #0f090b，其他保持原樣） */
         .tab-buttons .tab-btn.active:nth-child(1) {
             background-color: #0f090b !important;
             color: #ffffff !important;
-            box-shadow: 0 4px 0px #427fa8 !important;
+            box-shadow: 0 4px 0px #000000 !important;
         }
         .tab-buttons .tab-btn.active:nth-child(2) {
             background-color: #c48b59 !important;
@@ -298,7 +297,8 @@
             width: 100%;
             letter-spacing: 1px;
         }
-    </style> 	
+    </style>
+	
 </head>
 <body>
 
@@ -358,7 +358,9 @@
     /* 倒數計時器方塊 (.time-box) 改為 #0f090b 背景 */
     #countdown-content .time-box {
         background-color: #0f090b !important;
+        background: #0f090b !important;
         border-radius: 20px !important; 
+        box-shadow: none !important;
     }
 
     /* 計時器內部數字與英文死守白色 */
@@ -4742,7 +4744,7 @@
 
     /* 2. 頂部按鈕點擊變色：倒數(經典藍)、舞台(棕)、節目(綠)、YT(乾燥玫瑰粉) */
     .tab-buttons .tab-btn.active:nth-child(1) {
-        background-color: #5698c3 !important; /* 經典藍 */
+        background-color: #0f090b !important; /* 經典藍 */
         color: #ffffff !important;
     }
     .tab-buttons .tab-btn.active:nth-child(2) {
