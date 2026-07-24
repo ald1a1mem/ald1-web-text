@@ -325,7 +325,7 @@
 
 <style>
     #countdown-content .card {
-        border: 3px solid #5698c3 !important;
+        border: 3px solid #0f090b !important;
     }
     #countdown-content .card::before,
     #countdown-content .card::after,
@@ -339,19 +339,19 @@
     #countdown-content .schedule-title,
     #countdown-content .schedule-text,
     #countdown-content .schedule-item {
-        color: #5698c3 !important;
+        color: #0f090b !important;
     }
 
     /* 日程表日期文字變藍色 */
     #countdown-content .date-box {
         background: transparent !important;
-        color: #5698c3 !important;
+        color: #0f090b !important;
         border: none !important;
     }
 
     /* 迷你二輯小標籤變藍底 */
     #countdown-content .album-badge {
-        background-color: #5698c3 !important;
+        background-color: #0f090b !important;
         color: #ffffff !important;
     }
 
@@ -359,7 +359,7 @@
     #countdown-content .countdown-timer > div,
     #countdown-content .timer-box,
     #countdown-content .countdown-box {
-        background-color: #5698c3 !important;
+        background-color: #0f090b !important;
         border-radius: 20px !important; 
     }
 
@@ -389,16 +389,16 @@
                 <h2>回歸日程表</h2>
                 <ul class="schedule-list">
                     <li class="schedule-item">
-                        <span class="date-text">08.??</span>
-                        <span class="event-text">概念照 </span>
+                        <span class="date-text"> </span>
+                        <span class="event-text">  </span>
                     </li>
                     <li class="schedule-item">
-                        <span class="date-text">08.??</span>
-                        <span class="event-text"> MV預告 </span>
+                        <span class="date-text"> </span>
+                        <span class="event-text">   </span>
                     </li>
                     <li class="schedule-item">
-                        <span class="date-text">08.??</span>
-                        <span class="event-text">MV </span>
+                        <span class="date-text">08.24</span>
+                        <span class="event-text"> MV </span>
                     </li>
                 </ul>
             </div>
@@ -4933,6 +4933,24 @@
         if (firstContent) {
             firstContent.style.display = 'block';
         }
+
+const targetDate = new Date("2026-08-24T17:00:00").getTime();
+
+setInterval(function() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").innerText = days;
+    document.getElementById("hours").innerText = hours;
+    document.getElementById("minutes").innerText = minutes;
+    document.getElementById("seconds").innerText = seconds;
+}, 1000);
+
     });
     </script>
 
