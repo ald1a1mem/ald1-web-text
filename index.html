@@ -285,7 +285,11 @@
             <div class="video-info">
                 <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - Chains</div>
                 <div class="video-date">2026.01.13</div>
-                <button class="status-badge unwatched" data-status="unwatched" onclick="toggleStatus(this)">未觀看</button>
+                <select class="status-select" onchange="changeStatus(this)">
+        <option value="未觀看" selected>未觀看</option>
+        <option value="觀看中">觀看中</option>
+        <option value="已看過">已看過</option>
+    </select>
             </div>
 
         </a>
