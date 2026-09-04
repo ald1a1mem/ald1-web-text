@@ -324,20 +324,21 @@
             </div>
 
 <div class="video-card" data-status="未觀看" data-date="2026.01.13">
-    <!-- 影片圖片等內容 -->
+    <!-- 1. 縮圖 -->
+    <img src="您的圖片網址" alt="影片縮圖" class="video-thumb">
+    
+    <!-- 2. 標題與日期 -->
     <div class="video-title">ALPHA DRIVE ONE - Chains</div>
     <div class="video-date">2026.01.13</div>
     
+    <!-- 3. 下拉選單與觀看按鈕裝在同一行 -->
     <div class="card-footer-actions">
-        <!-- 觀看狀態下拉選單 -->
         <select class="status-select" onchange="changeStatus(this)">
             <option value="未觀看">未觀看</option>
             <option value="觀看中">觀看中</option>
             <option value="已看過">已看過</option>
         </select>
-
-        <!-- 簡化為「觀看」的按鈕，顏色會隨分頁主題自動變換 -->
-         <a href="https://www.youtube.com/watch?v=VxcPu1Aw5lQ" target="_blank" class="yt-link-btn">觀看</a>
+        <a href="https://youtube.com/..." target="_blank" class="yt-link-btn">觀看</a>
     </div>
 </div>
 
