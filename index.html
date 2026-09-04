@@ -3883,6 +3883,26 @@
         document.addEventListener("DOMContentLoaded", function() {
             showTab('stage-content', document.querySelector('.tab-btn'), '#c48b59');
         });
+
+function changeStatus(selectElement) {
+            const selectedStatus = selectElement.value; // 取得選中的狀態（未觀看 / 觀看中 / 已看過）
+            const card = selectElement.closest('.video-card');
+            
+            if (card) {
+                // 1. 重要：把狀態同步寫到卡片外層，這樣上方的篩選列才讀得到！
+                card.setAttribute('data-status', selectedStatus);
+                
+                // 2. 存入瀏覽器記憶
+                const titleElement = card.querySelector('.video-title');
+                if (titleElement) {
+                    const title = titleElement.innerText;
+                    localStorage.setItem('video_status_' + title, selectedStatus);
+                }
+
+                // 3. 如果您當前剛好有開啟某個篩選條件，更新後可以立即重新執行一次篩選
+                // （如果您原本有寫篩選函式，可以在這裡呼叫它，例如 filterVideos()）
+            }
+        }
     </script>
 
     <footer>©ald1.a1mem</footer>
