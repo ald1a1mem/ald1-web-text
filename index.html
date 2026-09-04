@@ -1,125 +1,117 @@
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ALD1 檔案室</title>
     <link rel="icon" type="image/png" href="https://github.com/ald1a1mem.png">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Noto+Sans+TC:wght@700&display=swap" rel="stylesheet">
 
-<style>
+    <!-- 社群分享預覽設定 -->
+    <meta property="og:title" content="ALD1 檔案室">
+    <meta property="og:description" content="ALD1 影片存放地">
+    <meta property="og:image" content="https://github.com/ald1a1mem.png">
+    <meta property="og:url" content="https://ald1a1mem.github.io/come-back/">
+    <meta property="og:type" content="website">
+
+    <style>
         :root {
-            --main-color: #5698c3;
-            --bg-color: #f4f8fb;
-            --card-bg: #ffffff;
+            --bg-color: #ffffff;
             --text-color: #3b5973;
-            --light-blue: #e6f0f7;
-            --active-color: #427fa8;
+            
+            /* 各分頁專屬主色 */
+            --stage-color: #c48b59;
+            --fancam-color: #C09D9B;
+            --variety-color: #5b8c76;
+            --yt-color: #b87070;
+            
+            --current-theme: var(--stage-color);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans TC', 'Fredoka', sans-serif;
+            font-weight: 700;
         }
 
         body {
-            font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            background-image: url('ald1_2.jfif.jfif');
-            background-size: contain;         /* 讓圖片完整顯示，不被強制裁切 */
-            background-position: center top;  /* 讓圖片靠上方或置中 */
-            background-repeat: no-repeat;
-            background-color: #0f090b;
+            padding: 20px;
         }
 
-        /* 網頁頂部標頭 */
-        .brand-header {
+        header {
             text-align: center;
-            padding: 30px 20px 15px 20px;
-        }
-        
-        .brand-title {
-            font-size: 2.6rem;
-            color: #638da3 !important; /* 改為指定的顏色 */
-            margin: 0;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-shadow: none;
+            margin-bottom: 25px;
         }
 
-        /* 網頁頂部 Tab 切換鍵按鈕列 */
+        .brand-header {
+            margin-bottom: 15px;
+        }
+
+        .brand-title {
+            color: var(--current-theme);
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        /* 主分頁按鈕區塊 */
         .tab-buttons {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            background: #ffffff;
-            padding: 8px;
-            border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(86, 152, 195, 0.1);
-            margin-bottom: 30px;
-            max-width: 90%;
+            gap: 10px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
-            border: 2px solid var(--light-blue);
         }
 
         .tab-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-color);
-            padding: 10px 20px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            border-radius: 50px;
+            background-color: transparent;
+            border: 2px solid var(--current-theme);
+            color: var(--current-theme);
+            padding: 8px 20px;
+            border-radius: 20px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
-        .tab-btn:hover {
-            background: var(--light-blue);
-            color: var(--main-color);
-        }
-
-        /* 按鈕啟動時的預設深藍色設定 */
         .tab-btn.active {
-            background: var(--main-color);
-            color: white;
-            box-shadow: 0 4px 0px var(--active-color);
+            background-color: var(--current-theme);
+            color: #ffffff;
         }
 
-        /* 按鈕點擊變色設定（僅分頁 1 改為 #0f090b，其他保持原樣） */
-        .tab-buttons .tab-btn.active:nth-child(1) {
-            background-color: #0f090b !important;
-            color: #ffffff !important;
-            box-shadow: 0 4px 0px #000000 !important;
-        }
-        .tab-buttons .tab-btn.active:nth-child(2) {
-            background-color: #c48b59 !important;
-            color: #ffffff !important;
-            box-shadow: 0 4px 0px #ab7343 !important;
-        }
-        .tab-buttons .tab-btn.active:nth-child(3) {
-            background-color: #5b8c76 !important;
-            color: #ffffff !important;
-            box-shadow: 0 4px 0px #446e5a !important;
-        }
-        .tab-buttons .tab-btn.active:nth-child(4) {
-            background-color: #b87070 !important;
-            color: #ffffff !important;
-            box-shadow: 0 4px 0px #9e5656 !important;
-        }
-
-        /* 內容容器 */
-        .container {
-            max-width: 750px;
-            width: 100%;
-            padding: 0 20px;
-            box-sizing: border-box;
+        /* 成員篩選列區塊 */
+        .member-filter-bar {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
-        /* 預設隱藏所有分頁，只顯示 active 的那一頁 */
+.member-btn {
+            background-color: transparent;
+            border: 2px solid var(--current-theme);
+            color: var(--current-theme);
+            padding: 6px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .member-btn:hover, .member-btn.active {
+            background-color: var(--current-theme);
+            color: #ffffff;
+        }
+
+        /* 內容分頁預設隱藏 */
         .tab-content {
             display: none;
         }
@@ -128,334 +120,128 @@
             display: block;
         }
 
-        /* 可愛手帳風卡片 */
-        .card {
-            background: var(--card-bg);
-            border: 4px solid var(--main-color);
-            border-radius: 28px;
-            padding: 35px 25px;
-            box-shadow: 0 10px 0px rgba(86, 152, 195, 0.15);
-            position: relative;
-            margin-bottom: 35px;
-        }
-
-        .card::before {
-            content: '● ●';
-            position: absolute;
-            top: 12px;
-            left: 20px;
-            color: var(--main-color);
-            opacity: 0.4;
-            font-size: 0.8rem;
-            letter-spacing: 3px;
-        }
-
-        h2 {
-            color: var(--main-color);
-            font-size: 1.7rem;
-            margin-top: 0;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .status-badge {
-            font-size: 1rem;
-            background: var(--light-blue);
-            color: var(--main-color);
-            padding: 6px 18px;
-            border-radius: 50px;
-            display: inline-block;
-            margin-bottom: 25px;
-            font-weight: bold;
-        }
-
-        /* 倒數計時 */
-        .countdown-wrap {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin: 20px 0;
-        }
-
-        .time-box {
-            background: var(--main-color);
-            color: white;
-            padding: 12px 0;
+        /* 讓每個影片小卡像圖四一樣擁有獨立框線、圓角與維持原本尺寸 */
+.video-card {
+            background: #ffffff;
+            border: 2px solid var(--current-theme);
             border-radius: 20px;
-            width: 85px;
-            box-shadow: 0 5px 0px var(--active-color);
-            text-align: center;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: border-color 0.3s ease;
+            margin-bottom: 20px;
+            padding: 15px; /* 確保四周有空間，不會貼齊邊框 */
         }
 
-        .time-num {
-            font-size: 2.2rem;
+        /* 影片標題、成員與日期樣式與超出防呆 */
+        .video-card .video-title {
+            color: var(--current-theme) !important;
+            font-family: 'Noto Sans TC', 'Fredoka', sans-serif;
             font-weight: 700;
-            display: block;
-            line-height: 1.1;
-        }
-
-        .time-label {
-            font-size: 0.8rem;
-            margin-top: 4px;
-            display: block;
-            opacity: 0.85;
-        }
-
-        /* 日程表 */
-        .schedule-list {
-            text-align: left;
-            padding: 0;
-            margin: 0;
-            list-style: none;
-        }
-
-        .schedule-item {
-            background: #fafbfc;
-            border: 2px dashed #b9d2e3;
-            padding: 15px 20px;
-            margin-bottom: 12px;
-            border-radius: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .date-text {
-            font-weight: 700;
-            color: var(--main-color);
+            white-space: nowrap;      /* 強制單行 */
+            overflow: hidden;         /* 超出隱藏 */
+            text-overflow: ellipsis;  /* 顯示省略號 ... */
             font-size: 1rem;
-            background: var(--light-blue);
-            padding: 3px 10px;
+            margin-bottom: 8px;
+        }
+
+        .video-card .video-member,
+        .video-card .video-date {
+            color: var(--current-theme) !important;
+            font-family: 'Noto Sans TC', 'Fredoka', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* 自訂義橫向滾動軸美化 */
+        .video-grid::-webkit-scrollbar {
+            height: 6px;
+        }
+        .video-grid::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .video-grid::-webkit-scrollbar-thumb {
+            background: #ccc;
             border-radius: 10px;
         }
 
-        .event-text {
-            flex-grow: 1;
-            padding-left: 15px;
-            font-size: 1rem;
-        }
-
-        /* 影音卡片網格 */
-        .video-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        @media (max-width: 600px) {
-            .countdown-wrap { flex-wrap: wrap; }
-        }
-
-        .video-card {
-            background: #ffffff;
-            border: 2px solid #b9d2e3;
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            transition: transform 0.2s ease;
-        }
-
-        .video-card:hover {
-            transform: translateY(-3px);
-        }
-
-        /* 響應式影片外殼 */
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-            background: #eef2f5;
-        }
-
-        .video-info {
-            padding: 12px;
-        }
-
-        .video-title {
-            font-weight: bold;
-            font-size: 0.95rem;
-            margin-bottom: 5px;
-            color: var(--text-color);
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            line-height: 1.3;
-        }
-
-        .video-date {
-            font-size: 0.8rem;
-            color: #8faec6;
-        }
-
-        /* 頁尾樣式 */
         footer {
-            margin: 20px 0 30px 0;
-            font-size: 0.85rem;
-            color: #a0b9cc;
             text-align: center;
-            width: 100%;
-            letter-spacing: 1px;
+            padding: 20px 0;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            opacity: 0.8;
         }
-    </style>
-	
+   </style>
 </head>
+
 <body>
 
-    <div class="brand-header">
-        <div class="brand-title">ALPHA DRIVE ONE</div>
-    </div>
-
-<div class="tab-buttons">
-    <button class="tab-btn" onclick="showTab('countdown-content', this)">📅 回歸倒數</button>
-    <button class="tab-btn" onclick="showTab('stage-content', this)">🎤 舞台</button>
-    <button class="tab-btn" onclick="showTab('variety-content', this)">🎬 節目</button>
-    <button class="tab-btn" onclick="showTab('yt-content', this)">📺 官方YT</button>
-</div>
-
-<div class="member-filter-bar" id="member-filters" style="display: none;">
-    <button class="member-btn active" onclick="filterMember('all', this)">全部</button>
-    <button class="member-btn" onclick="filterMember('俊抒', this)">俊抒</button>
-    <button class="member-btn" onclick="filterMember('ARNO', this)">ARNO</button>
-    <button class="member-btn" onclick="filterMember('LEO', this)">LEO</button>
-    <button class="member-btn" onclick="filterMember('虔佑', this)">虔佑</button>
-    <button class="member-btn" onclick="filterMember('相沅', this)">相沅</button>
-    <button class="member-btn" onclick="filterMember('鑫隆', this)">鑫隆</button>
-    <button class="member-btn" onclick="filterMember('安信', this)">安信</button>
-    <button class="member-btn" onclick="filterMember('相炫', this)">相炫</button>
-</div>
-
-<!-- ================= 分頁 1：回歸倒數 ================= -->
-    <div class="container">
-<div id="countdown-content" class="tab-content active">
-
-<style>
-    #countdown-content .card {
-        border: 3px solid #0f090b !important;
-    }
-    #countdown-content .card::before,
-    #countdown-content .card::after,
-    #countdown-content .dot { 
-        display: none !important;
-    }
-
-    /* 標題與日程表文字變 #0f090b */
-    #countdown-content h2, 
-    #countdown-content h1,
-    #countdown-content .schedule-title,
-    #countdown-content .schedule-text,
-    #countdown-content .schedule-item,
-    #countdown-content .event-text {
-        color: #0f090b !important;
-    }
-
-    /* 迷你二輯小標籤 (.status-badge) 變 #0f090b 底色 */
-    #countdown-content .status-badge {
-        background-color: #0f090b !important;
-        color: #ffffff !important;
-    }
-
-    /* 倒數計時器方塊 (.time-box) 改為 #0f090b 背景 */
-    #countdown-content .time-box {
-        background-color: #0f090b !important;
-        background: #0f090b !important;
-        border-radius: 20px !important; 
-        box-shadow: none !important;
-    }
-
-    /* 計時器內部數字與英文死守白色 */
-    #countdown-content .time-box span,
-    #countdown-content .time-num,
-    #countdown-content .time-label {
-        color: #ffffff !important;
-        display: inline-block;
-    }
-
-    /* 回歸日程表的項目外框改為 #0f090b 虛線 */
-    #countdown-content .schedule-list {
-        list-style: none;
-        padding: 0;
-    }
-    #countdown-content .schedule-item {
-        border: 2px dashed #0f090b !important;
-        border-radius: 15px;
-        padding: 10px 15px;
-        margin-bottom: 10px;
-    }
-
-    /* 日程表裡的日期文字 (08.24) 調整為乾淨的外觀 */
-    #countdown-content .date-text {
-        background: transparent !important;
-        color: #0f090b !important;
-        font-weight: bold;
-    }
-</style>
-
-            <div class="card" style="text-align: center;">
-                <h2>COMEBACK</h2>
-                <div class="status-badge">迷你二輯</div>
-
-                <div class="countdown-wrap">
-                    <div class="time-box"><span class="time-num" id="days">00</span><span class="time-label">Days</span></div>
-                    <div class="time-box"><span class="time-num" id="hours">00</span><span class="time-label">Hours</span></div>
-                    <div class="time-box"><span class="time-num" id="minutes">00</span><span class="time-label">Mins</span></div>
-                    <div class="time-box"><span class="time-num" id="seconds">00</span><span class="time-label">Secs</span></div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2>回歸行程表</h2>
-<ul class="schedule-list">
-
-<ul class="schedule-list">
-
-    <li class="schedule-item">
-    <div style="display: flex; flex-direction: column; align-items: center; width: 50px; flex-shrink: 0;">
-    <span class="date-text"> </span>
-    <span style="font-size: 0.8rem; color: #0f090b; margin-top: 2px;"> </span>
-    </div>
-    <span class="event-text"> </span>
-    </a>
-    </li>
-
-</ul>
-            </div>
+    <header>
+        <div class="brand-header">
+            <div class="brand-title">ALPHA DRIVE ONE</div>
         </div>
-<!-- ================= 分頁 2：舞台 ================= -->
-<div id="stage-content" class="tab-content">
 
-<style>
-    #stage-content {
-        padding: 20px 0; width: 100%; max-width: 710px; margin: 0 auto; box-sizing: border-box;
-    }
-    #stage-content .card {
-        background: #ffffff !important;
-        border: 3px solid #c48b59 !important;
-        border-radius: 30px !important;
-        padding: 30px 25px !important;
-        margin-bottom: 30px !important;
-        box-shadow: 0 8px 24px rgba(196, 139, 89, 0.1) !important;
-        width: 100% !important; box-sizing: border-box !important; display: block !important;
-    }
-    /* 1. 標題、影片標題與影片日期全部改成焦糖暖棕 */
-    #stage-content h2,
-    #stage-content .video-title,
-    #stage-content .stage-title,
-    #stage-content .video-member,
-    #stage-content .video-date,
-    #stage-content .stage-date {
-        color: #c48b59 !important;
-    }
-    #stage-content h2 {
-        font-size: 24px !important; margin-top: 0 !important; margin-bottom: 20px !important; text-align: center !important; font-weight: bold !important;
-    }
-    /* 2. 徹底隱藏左上角長方體 */
-    #stage-content .card::before,
-    #stage-content .dot,
-    #stage-content .circle { 
-        display: none !important; 
-    }
-</style>
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="showTab('stage-content', this, 'var(--stage-color)')">🎤 舞台</button>
+            <button class="tab-btn" onclick="showTab('fancam-content', this, 'var(--fancam-color)')">🎥 直拍</button>
+            <button class="tab-btn" onclick="showTab('variety-content', this, 'var(--variety-color)')">🎬 節目</button>
+            <button class="tab-btn" onclick="showTab('yt-content', this, 'var(--yt-color)')">📺 官方YT</button>
+        </div>
+
+        <div class="member-filter-bar" id="member-filters" style="display: none;">
+            <button class="member-btn active" onclick="filterMember('all', this)">全部</button>
+            <button class="member-btn" onclick="filterMember('俊抒', this)">俊抒</button>
+            <button class="member-btn" onclick="filterMember('ARNO', this)">ARNO</button>
+            <button class="member-btn" onclick="filterMember('LEO', this)">LEO</button>
+            <button class="member-btn" onclick="filterMember('虔佑', this)">虔佑</button>
+            <button class="member-btn" onclick="filterMember('相沅', this)">相沅</button>
+            <button class="member-btn" onclick="filterMember('鑫隆', this)">鑫隆</button>
+            <button class="member-btn" onclick="filterMember('安信', this)">安信</button>
+            <button class="member-btn" onclick="filterMember('相炫', this)">相炫</button>
+        </div>
+
+<div class="member-filter-bar" id="status-filters">
+            <button class="member-btn active" onclick="filterStatus('all', this)">全部進度</button>
+            <button class="member-btn" onclick="filterStatus('已看過', this)">已看過</button>
+            <button class="member-btn" onclick="filterStatus('觀看中', this)">觀看中</button>
+            <button class="member-btn" onclick="filterStatus('未觀看', this)">未觀看</button>
+        </div>
+    </header>
+
+    <!-- ================= 分頁 1：舞台 ================= -->
+    <div id="stage-content" class="tab-content active">
+        <style>
+            #stage-content {
+                padding: 20px 0; width: 100%; max-width: 710px; margin: 0 auto; box-sizing: border-box;
+            }
+            #stage-content .card {
+                background: #ffffff !important;
+                border: 3px solid #c48b59 !important;
+                border-radius: 30px !important;
+                padding: 30px 25px !important;
+                margin-bottom: 30px !important;
+                box-shadow: 0 8px 24px rgba(196, 139, 89, 0.1) !important;
+                width: 100% !important; box-sizing: border-box !important; display: block !important;
+            }
+            #stage-content h2,
+            #stage-content .video-title,
+            #stage-content .stage-title,
+            #stage-content .video-member,
+            #stage-content .video-date,
+            #stage-content .stage-date {
+                color: #c48b59 !important;
+            }
+            #stage-content h2 {
+                font-size: 24px !important; margin-top: 0 !important; margin-bottom: 20px !important; text-align: center !important; font-weight: bold !important;
+            }
+            #stage-content .card::before,
+            #stage-content .dot,
+            #stage-content .circle { 
+                display: none !important; 
+            }
+        </style>
 
 <div class="card">
     <h2>EUPHORIA</h2>
@@ -943,40 +729,76 @@
 </div>
 
 </div>
-<!-- ================= 分頁 3：節目 ================= -->
-<div id="variety-content" class="tab-content" style="display: none;">
-    
-<style>
-    #variety-content {
-        padding: 20px 0; width: 100%; max-width: 710px; margin: 0 auto; box-sizing: border-box;
-    }
-    #variety-content .card {
-        background: #ffffff !important;
-        border: 3px solid #5b8c76 !important;
-        border-radius: 30px !important;
-        padding: 30px 25px !important;
-        margin-bottom: 30px !important;
-        box-shadow: 0 8px 24px rgba(91, 140, 118, 0.1) !important;
-        width: 100% !important; box-sizing: border-box !important; display: block !important;
-    }
-    /* 1. 標題、影片名、成員名、影片日期全部變成迷霧森林深綠 */
-    #variety-content h2,
-    #variety-content .video-title,
-    #variety-content .video-member,
-    #variety-content .video-date,
-    #variety-content .variety-date {
-        color: #5b8c76 !important;
-    }
-    #variety-content h2 {
-        font-size: 24px !important; margin-top: 0 !important; margin-bottom: 20px !important; text-align: center !important; font-weight: bold !important;
-    }
-    /* 2. 徹底隱藏左上角長方體 */
-    #variety-content .card::before,
-    #variety-content .dot,
-    #variety-content .circle { 
-        display: none !important; 
-    }
-</style>
+
+    <!-- ================= 分頁 2：直拍 ================= -->
+    <div id="fancam-content" class="tab-content">
+        <style>
+            #fancam-content {
+                padding: 20px 0; width: 100%; max-width: 710px; margin: 0 auto; box-sizing: border-box;
+            }
+            #fancam-content .card {
+                background: #ffffff !important;
+                border: 3px solid #C09D9B !important;
+                border-radius: 30px !important;
+                padding: 30px 25px !important;
+                margin-bottom: 30px !important;
+                box-shadow: 0 8px 24px rgba(192, 157, 155, 0.1) !important;
+                width: 100% !important; box-sizing: border-box !important; display: block !important;
+            }
+            #fancam-content h2,
+            #fancam-content .video-title,
+            #fancam-content .stage-title,
+            #fancam-content .video-member,
+            #fancam-content .video-date,
+            #fancam-content .stage-date {
+                color: #C09D9B !important;
+            }
+            #fancam-content h2 {
+                font-size: 24px !important; margin-top: 0 !important; margin-bottom: 20px !important; text-align: center !important; font-weight: bold !important;
+            }
+            #fancam-content .card::before,
+            #fancam-content .dot,
+            #fancam-content .circle { 
+                display: none !important; 
+            }
+        </style>
+
+
+
+    </div>
+
+    <!-- ================= 分頁 3：節目 ================= -->
+    <div id="variety-content" class="tab-content">
+        <style>
+            #variety-content {
+                padding: 20px 0; width: 100%; max-width: 710px; margin: 0 auto; box-sizing: border-box;
+            }
+            #variety-content .card {
+                background: #ffffff !important;
+                border: 3px solid #5b8c76 !important;
+                border-radius: 30px !important;
+                padding: 30px 25px !important;
+                margin-bottom: 30px !important;
+                box-shadow: 0 8px 24px rgba(91, 140, 118, 0.1) !important;
+                width: 100% !important; box-sizing: border-box !important; display: block !important;
+            }
+            #variety-content h2,
+            #variety-content .video-title,
+            #variety-content .stage-title,
+            #variety-content .video-member,
+            #variety-content .video-date,
+            #variety-content .stage-date {
+                color: #5b8c76 !important;
+            }
+            #variety-content h2 {
+                font-size: 24px !important; margin-top: 0 !important; margin-bottom: 20px !important; text-align: center !important; font-weight: bold !important;
+            }
+            #variety-content .card::before,
+            #variety-content .dot,
+            #variety-content .circle { 
+                display: none !important; 
+            }
+         </style>
 
 <div class="card">
     <h2>電台</h2>
@@ -1796,39 +1618,39 @@
 
 
 </div>
-<!-- ================= 分頁 4：官方YT ================= -->
-<div id="yt-content" class="tab-content" style="display: none;">
 
-<style>
-    #yt-content {
-        padding: 20px 0; width: 100%; max-width: 710px; margin: 0 auto; box-sizing: border-box;
-    }
-    #yt-content .card {
-        background: #ffffff !important;
-        border: 3px solid #b87070 !important; /* 換成乾燥玫瑰粉框 */
-        border-radius: 30px !important;
-        padding: 30px 25px !important;
-        margin-bottom: 30px !important;
-        box-shadow: 0 8px 24px rgba(184, 112, 112, 0.1) !important;
-        width: 100% !important; box-sizing: border-box !important; display: block !important;
-    }
-    /* 1. 標題、影片名與影片日期全部變成乾燥玫瑰深粉 */
-    #yt-content h2,
-    #yt-content .video-title,
-    #yt-content .video-date,
-    #yt-content .yt-date {
-        color: #b87070 !important;
-    }
-    #yt-content h2 {
-        font-size: 24px !important; margin-top: 0 !important; margin-bottom: 20px !important; text-align: center !important; font-weight: bold !important;
-    }
-    /* 2. 徹底隱藏左上角長方體 */
-    #yt-content .card::before,
-    #yt-content .dot,
-    #yt-content .circle { 
-        display: none !important; 
-    }
-</style>
+    <!-- ================= 分頁 4：官方YT ================= -->
+    <div id="yt-content" class="tab-content">
+        <style>
+            #yt-content {
+                padding: 20px 0; width: 100%; max-width: 710px; margin: 0 auto; box-sizing: border-box;
+            }
+            #yt-content .card {
+                background: #ffffff !important;
+                border: 3px solid #b87070 !important;
+                border-radius: 30px !important;
+                padding: 30px 25px !important;
+                margin-bottom: 30px !important;
+                box-shadow: 0 8px 24px rgba(184, 112, 112, 0.1) !important;
+                width: 100% !important; box-sizing: border-box !important; display: block !important;
+            }
+            #yt-content h2,
+            #yt-content .video-title,
+            #yt-content .stage-title,
+            #yt-content .video-member,
+            #yt-content .video-date,
+            #yt-content .stage-date {
+                color: #b87070 !important;
+            }
+            #yt-content h2 {
+                font-size: 24px !important; margin-top: 0 !important; margin-bottom: 20px !important; text-align: center !important; font-weight: bold !important;
+            }
+            #yt-content .card::before,
+            #yt-content .dot,
+            #yt-content .circle { 
+                display: none !important; 
+            }
+        </style>
 
 <div class="card">
         <h2>MV</h2>
@@ -3809,4 +3631,140 @@
     </div>
 </div>
 
-</div> <footer>©ald1.a1mem</footer>
+    </div>
+
+    <!-- ================================== -->
+
+<script>
+        function showTab(targetId, btnElement, themeColor) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // 如果沒有傳入 btnElement（例如網頁剛載入時），預設選中第一個舞台按鈕
+            if (!btnElement) {
+                btnElement = document.querySelector('.tab-btn');
+            }
+
+            document.getElementById(targetId).classList.add('active');
+            btnElement.classList.add('active');
+
+            document.documentElement.style.setProperty('--current-theme', themeColor);
+
+            const memberFilters = document.getElementById('member-filters');
+            // 只有直拍、節目、官方YT顯示成員篩選列，舞台不顯示
+            if (targetId === 'fancam-content' || targetId === 'variety-content' || targetId === 'yt-content') {
+                memberFilters.style.display = 'flex';
+            } else {
+                memberFilters.style.display = 'none';
+            }
+
+            // 每次切換分頁時，將成員與觀看進度的篩選全部重設回「全部」
+            resetFilters();
+
+            const activeGrid = document.querySelector('#' + targetId + ' .video-grid');
+            if (activeGrid) {
+                sortVideos(activeGrid);
+            }
+        }
+
+        function filterMember(member, btnElement) {
+            const memberBtns = document.querySelectorAll('#member-filters .member-btn');
+            memberBtns.forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            applyFilters();
+        }
+
+        // 新增：觀看標籤篩選函式
+        function filterStatus(status, btnElement) {
+            const statusBtns = document.querySelectorAll('#status-filters .member-btn');
+            statusBtns.forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            applyFilters();
+        }
+
+        // 綜合過濾機制（同時支援成員與觀看狀態雙重篩選）
+        function applyFilters() {
+            const activeContent = document.querySelector('.tab-content.active');
+            if (!activeContent) return;
+
+            const activeMemberBtn = document.querySelector('#member-filters .member-btn.active');
+            const activeStatusBtn = document.querySelector('#status-filters .member-btn.active');
+
+            // 判斷目前選中的成員與狀態條件（如果成員列隱藏則視為 'all'）
+            const memberFiltersVisible = document.getElementById('member-filters').style.display !== 'none';
+            let currentMember = 'all';
+            if (memberFiltersVisible && activeMemberBtn) {
+                currentMember = activeMemberBtn.innerText.trim();
+            }
+
+            let currentStatus = 'all';
+            if (activeStatusBtn) {
+                const statusText = activeStatusBtn.innerText.trim();
+                if (statusText === '已看過') currentStatus = '已看過';
+                else if (statusText === '觀看中') currentStatus = '觀看中';
+                else if (statusText === '未觀看') currentStatus = '未觀看';
+            }
+
+            const cards = activeContent.querySelectorAll('.video-card');
+            cards.forEach(card => {
+                const cardMember = card.getAttribute('data-member');
+                const cardStatus = card.getAttribute('data-status');
+
+                const matchMember = (currentMember === '全部' || cardMember === currentMember || cardMember === '全員' || !memberFiltersVisible);
+                const matchStatus = (currentStatus === 'all' || cardStatus === currentStatus);
+
+                if (matchMember && matchStatus) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 重設所有篩選按鈕與顯示狀態
+        function resetFilters() {
+            document.querySelectorAll('#member-filters .member-btn').forEach((btn, idx) => {
+                if(idx === 0) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+            document.querySelectorAll('#status-filters .member-btn').forEach((btn, idx) => {
+                if(idx === 0) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+
+            const activeContent = document.querySelector('.tab-content.active');
+            if (!activeContent) return;
+            const cards = activeContent.querySelectorAll('.video-card');
+            cards.forEach(card => card.style.display = 'block');
+        }
+
+        function sortVideos(grid) {
+            if (!grid) return;
+            const cards = Array.from(grid.getElementsByClassName('video-card'));
+            if (cards.length === 0) return;
+            
+            cards.sort((a, b) => {
+                const dateA = new Date(a.getAttribute('data-date'));
+                const dateB = new Date(b.getAttribute('data-date'));
+                return dateB - dateA;
+            });
+
+            cards.forEach(card => {
+                grid.appendChild(card);
+            });
+        }
+
+        // 網頁一載入時，強制初始化為舞台分頁（隱藏成員篩選列、套用正確狀態）
+        document.addEventListener("DOMContentLoaded", function() {
+            showTab('stage-content', document.querySelector('.tab-btn'), '#c48b59');
+        });
+    </script>
+
+    <footer>©ald1.a1mem</footer>
+</body>
+</html>
