@@ -3663,27 +3663,29 @@
         }
 
         function filterMember(member, btnElement) {
-            // 1. 切換成員按鈕的高亮外框（active）
+            // 1. 切換按鈕樣式
             const buttons = document.querySelectorAll('.member-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             if (btnElement) {
                 btnElement.classList.add('active');
             }
 
-            // 2. 抓取目前打開的分頁
+            // 2. 抓目前顯示的分頁
             const activeTab = document.querySelector('.tab-content.active');
             if (!activeTab) return;
 
-            // 3. 檢查分頁裡每一張影片卡片的成員文字，符合就顯示，不符合就隱藏
+            // 3. 只抓真正的影片卡片（有包含 .video-member 的才算，不會誤傷電台/KBS分類框）
             const cards = activeTab.querySelectorAll('.video-card');
             cards.forEach(card => {
                 const memberDiv = card.querySelector('.video-member');
-                const memberText = memberDiv ? memberDiv.innerText : '';
+                if (!memberDiv) return; // 如果這張卡片沒有成員標籤就跳過
+
+                const memberText = memberDiv.innerText;
                 
                 if (member === 'all' || memberText.includes(member)) {
-                    card.classList.remove('hidden'); // 顯示
+                    card.classList.remove('hidden');
                 } else {
-                    card.classList.add('hidden');    // 隱藏
+                    card.classList.add('hidden');
                 }
             });
         }
@@ -3707,7 +3709,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             showTab('stage-content', document.querySelector('.tab-btn'), '#c48b59');
         });
-    </script> 
+    </script>
 
     <footer>©ald1.a1mem</footer>
 </body>
