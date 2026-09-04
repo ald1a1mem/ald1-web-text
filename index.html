@@ -132,6 +132,10 @@
             padding: 15px; /* 確保四周有空間，不會貼齊邊框 */
         }
 
+.video-card.hidden {
+        display: none !important;
+    }
+
         /* 影片標題、成員與日期樣式與超出防呆 */
         .video-card .video-title {
             color: var(--current-theme) !important;
@@ -3628,14 +3632,14 @@
 
     <!-- ================================== -->
 
-function showTab(targetId, btnElement, themeColor) {
+<script>
+        function showTab(targetId, btnElement, themeColor) {
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
 
             const buttons = document.querySelectorAll('.tab-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
 
-            // 如果沒有傳入 btnElement（例如網頁剛載入時），預設選中第一個舞台按鈕
             if (!btnElement) {
                 btnElement = document.querySelector('.tab-btn');
             }
@@ -3646,7 +3650,6 @@ function showTab(targetId, btnElement, themeColor) {
             document.documentElement.style.setProperty('--current-theme', themeColor);
 
             const memberFilters = document.getElementById('member-filters');
-            // 只有直拍、節目、官方YT顯示成員篩選列，舞台不顯示
             if (targetId === 'fancam-content' || targetId === 'variety-content' || targetId === 'yt-content') {
                 memberFilters.style.display = 'flex';
             } else {
@@ -3657,50 +3660,30 @@ function showTab(targetId, btnElement, themeColor) {
             if (activeGrid) {
                 sortVideos(activeGrid);
             }
-
-            // 切換分頁時，同步重置成員篩選按鈕狀態為「全部」，並顯示該分頁下的所有卡片
-            if (memberFilters) {
-                const filterBtns = memberFilters.querySelectorAll('.member-btn');
-                filterBtns.forEach(b => b.classList.remove('active'));
-                const allBtn = memberFilters.querySelector('.member-btn'); // 假設第一個是「全部」
-                if (allBtn) allBtn.classList.add('active');
-            }
-
-            const activeContent = document.getElementById(targetId);
-            if (activeContent) {
-                const cards = activeContent.querySelectorAll('.video-card');
-                cards.forEach(card => {
-                    card.style.display = 'block';
-                });
-            }
         }
 
         function filterMember(member, btnElement) {
-            // 1. 切換按鈕的 active 狀態
-            const memberFilters = document.getElementById('member-filters');
-            if (memberFilters) {
-                const buttons = memberFilters.querySelectorAll('.member-btn');
-                buttons.forEach(btn => btn.classList.remove('active'));
-            }
+            // 1. 切換成員按鈕的高亮外框（active）
+            const buttons = document.querySelectorAll('.member-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
             if (btnElement) {
                 btnElement.classList.add('active');
             }
 
-            // 2. 取得目前顯示中的分頁內容
+            // 2. 抓取目前打開的分頁
             const activeTab = document.querySelector('.tab-content.active');
             if (!activeTab) return;
 
-            // 3. 只針對目前顯示的分頁內的卡片做篩選
+            // 3. 檢查分頁裡每一張影片卡片的成員文字，符合就顯示，不符合就隱藏
             const cards = activeTab.querySelectorAll('.video-card');
-            
             cards.forEach(card => {
                 const memberDiv = card.querySelector('.video-member');
                 const memberText = memberDiv ? memberDiv.innerText : '';
                 
                 if (member === 'all' || memberText.includes(member)) {
-                    card.style.display = 'block';
+                    card.classList.remove('hidden'); // 顯示
                 } else {
-                    card.style.display = 'none';
+                    card.classList.add('hidden');    // 隱藏
                 }
             });
         }
@@ -3721,11 +3704,10 @@ function showTab(targetId, btnElement, themeColor) {
             });
         }
 
-        // 網頁一載入時，強制初始化為舞台分頁（隱藏篩選列、套用正確狀態）
         document.addEventListener("DOMContentLoaded", function() {
             showTab('stage-content', document.querySelector('.tab-btn'), '#c48b59');
         });
-    </script>
+    </script> 
 
     <footer>©ald1.a1mem</footer>
 </body>
