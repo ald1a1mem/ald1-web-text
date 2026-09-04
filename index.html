@@ -3633,83 +3633,79 @@
     <!-- ================================== -->
 
 <script>
-        function showTab(targetId, btnElement, themeColor) {
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.remove('active'));
+function showTab(targetId, btnElement, themeColor) {
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(content => content.classList.remove('active'));
 
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
 
-            if (!btnElement) {
-                btnElement = document.querySelector('.tab-btn');
-            }
+    if (!btnElement) {
+        btnElement = document.querySelector('.tab-btn');
+    }
 
-            document.getElementById(targetId).classList.add('active');
-            btnElement.classList.add('active');
+    document.getElementById(targetId).classList.add('active');
+    btnElement.classList.add('active');
 
-            document.documentElement.style.setProperty('--current-theme', themeColor);
+    document.documentElement.style.setProperty('--current-theme', themeColor);
 
-            const memberFilters = document.getElementById('member-filters');
-            if (targetId === 'fancam-content' || targetId === 'variety-content' || targetId === 'yt-content') {
-                memberFilters.style.display = 'flex';
-            } else {
-                memberFilters.style.display = 'none';
-            }
+    const memberFilters = document.getElementById('member-filters');
+    if (targetId === 'fancam-content' || targetId === 'variety-content' || targetId === 'yt-content') {
+        memberFilters.style.display = 'flex';
+    } else {
+        memberFilters.style.display = 'none';
+    }
 
-            const activeGrid = document.querySelector('#' + targetId + ' .video-grid');
-            if (activeGrid) {
-                sortVideos(activeGrid);
-            }
+    const activeGrid = document.querySelector('#' + targetId + ' .video-grid');
+    if (activeGrid) {
+        sortVideos(activeGrid);
+    }
+}
+
+function filterMember(member, btnElement) {
+    const buttons = document.querySelectorAll('.member-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    if (btnElement) {
+        btnElement.classList.add('active');
+    }
+
+    const activeTab = document.querySelector('.tab-content.active');
+    if (!activeTab) return;
+
+    const cards = activeTab.querySelectorAll('.video-card');
+    cards.forEach(card => {
+        const memberDiv = card.querySelector('.video-member');
+        if (!memberDiv) return;
+
+        const memberText = memberDiv.innerText;
+        if (member === 'all' || memberText.includes(member)) {
+            card.classList.remove('hidden');
+        } else {
+            card.classList.add('hidden');
         }
+    });
+}
 
-        function filterMember(member, btnElement) {
-            // 1. 切換按鈕樣式
-            const buttons = document.querySelectorAll('.member-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            if (btnElement) {
-                btnElement.classList.add('active');
-            }
+function sortVideos(grid) {
+    if (!grid) return;
+    const cards = Array.from(grid.getElementsByClassName('video-card'));
+    if (cards.length === 0) return;
+    
+    cards.sort((a, b) => {
+        const dateA = new Date(a.getAttribute('data-date'));
+        const dateB = new Date(b.getAttribute('data-date'));
+        return dateB - dateA;
+    });
 
-            // 2. 抓目前顯示的分頁
-            const activeTab = document.querySelector('.tab-content.active');
-            if (!activeTab) return;
+    cards.forEach(card => {
+        grid.appendChild(card);
+    });
+}
 
-            // 3. 只抓真正的影片卡片（有包含 .video-member 的才算，不會誤傷電台/KBS分類框）
-            const cards = activeTab.querySelectorAll('.video-card');
-            cards.forEach(card => {
-                const memberDiv = card.querySelector('.video-member');
-                if (!memberDiv) return; // 如果這張卡片沒有成員標籤就跳過
-
-                const memberText = memberDiv.innerText;
-                
-                if (member === 'all' || memberText.includes(member)) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
-            });
-        }
-
-        function sortVideos(grid) {
-            if (!grid) return;
-            const cards = Array.from(grid.getElementsByClassName('video-card'));
-            if (cards.length === 0) return;
-            
-            cards.sort((a, b) => {
-                const dateA = new Date(a.getAttribute('data-date'));
-                const dateB = new Date(b.getAttribute('data-date'));
-                return dateB - dateA;
-            });
-
-            cards.forEach(card => {
-                grid.appendChild(card);
-            });
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            showTab('stage-content', document.querySelector('.tab-btn'), '#c48b59');
-        });
-    </script>
+document.addEventListener("DOMContentLoaded", function() {
+    showTab('stage-content', document.querySelector('.tab-btn'), '#c48b59');
+});
+</script>
 
     <footer>©ald1.a1mem</footer>
 </body>
