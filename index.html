@@ -132,38 +132,6 @@
             padding: 15px; /* 確保四周有空間，不會貼齊邊框 */
         }
 
-/* 觀看狀態互動標籤樣式 */
-        .status-badge {
-            display: inline-block;
-            margin-top: 8px;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            cursor: pointer;
-            border: 2px solid var(--current-theme);
-            background-color: transparent;
-            color: var(--current-theme);
-            transition: all 0.3s ease;
-        }
-
-        /* 依據不同狀態顯示不同填滿顏色 */
-        .status-badge.watched {
-            background-color: var(--current-theme);
-            color: #ffffff;
-        }
-
-        .status-badge.watching {
-            background-color: #f39c12; /* 觀看中可以用亮橘色或主題色 */
-            border-color: #f39c12;
-            color: #ffffff;
-        }
-
-        .status-badge.unwatched {
-            background-color: transparent;
-            color: var(--current-theme);
-        }
-
         /* 影片標題、成員與日期樣式與超出防呆 */
         .video-card .video-title {
             color: var(--current-theme) !important;
@@ -205,46 +173,6 @@
             color: var(--text-color);
             opacity: 0.8;
         }
-
-.card-footer-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        /* 下拉選單：邊框與文字採用當前主題色 */
-        .status-select {
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            font-family: 'Noto Sans TC', sans-serif;
-            cursor: pointer;
-            border: 2px solid var(--current-theme);
-            background-color: #ffffff;
-            color: var(--current-theme);
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        /* 觀看按鈕：背景直接填滿當前主題色 */
-        .yt-link-btn {
-            font-size: 0.8rem;
-            font-weight: 700;
-            font-family: 'Noto Sans TC', sans-serif;
-            text-decoration: none;
-            color: #ffffff;
-            background-color: var(--current-theme);
-            border: 2px solid var(--current-theme);
-            padding: 4px 14px;
-            border-radius: 12px;
-            transition: opacity 0.2s, background-color 0.3s;
-        }
-
-        .yt-link-btn:hover {
-            opacity: 0.85;
-        }
    </style>
 </head>
 
@@ -272,13 +200,6 @@
             <button class="member-btn" onclick="filterMember('鑫隆', this)">鑫隆</button>
             <button class="member-btn" onclick="filterMember('安信', this)">安信</button>
             <button class="member-btn" onclick="filterMember('相炫', this)">相炫</button>
-        </div>
-
-<div class="member-filter-bar" id="status-filters">
-            <button class="member-btn active" onclick="filterStatus('all', this)">全部進度</button>
-            <button class="member-btn" onclick="filterStatus('已看過', this)">已看過</button>
-            <button class="member-btn" onclick="filterStatus('觀看中', this)">觀看中</button>
-            <button class="member-btn" onclick="filterStatus('未觀看', this)">未觀看</button>
         </div>
     </header>
 
@@ -322,26 +243,10 @@
             <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
                 <img src="https://img.youtube.com/vi/VxcPu1Aw5lQ/mqdefault.jpg" alt="封面" style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
             </div>
-
-<div class="video-card" data-status="未觀看" data-date="2026.01.13">
-    <!-- 1. 縮圖 -->
-    <img src="您的圖片網址" alt="影片縮圖" class="video-thumb">
-    
-    <!-- 2. 標題與日期 -->
-    <div class="video-title">ALPHA DRIVE ONE - Chains</div>
-    <div class="video-date">2026.01.13</div>
-    
-    <!-- 3. 下拉選單與觀看按鈕裝在同一行 -->
-    <div class="card-footer-actions">
-        <select class="status-select" onchange="changeStatus(this)">
-            <option value="未觀看">未觀看</option>
-            <option value="觀看中">觀看中</option>
-            <option value="已看過">已看過</option>
-        </select>
-        <a href="https://youtube.com/..." target="_blank" class="yt-link-btn">觀看</a>
-    </div>
-</div>
-
+            <div class="video-info">
+                <div class="video-title" style="color: var(--text-color);">ALPHA DRIVE ONE - Chains</div>
+                <div class="video-date">2026.01.13</div>
+            </div>
         </a>
         <a href="https://www.youtube.com/watch?v=QnhJMrgSLQ8" target="_blank" class="video-card" style="flex: 0 0 260px; text-decoration: none; display: block;">
             <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; overflow: hidden; border-radius: 14px 14px 0 0;">
@@ -3723,7 +3628,7 @@
 
     <!-- ================================== -->
 
-<script>
+    <script>
         function showTab(targetId, btnElement, themeColor) {
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
@@ -3749,120 +3654,28 @@
                 memberFilters.style.display = 'none';
             }
 
-            // 每次切換分頁時，將成員與觀看進度的篩選全部重設回「全部」
-            resetFilters();
-
             const activeGrid = document.querySelector('#' + targetId + ' .video-grid');
             if (activeGrid) {
                 sortVideos(activeGrid);
             }
         }
 
-        function filterMember(member, btnElement) {
-            const memberBtns = document.querySelectorAll('#member-filters .member-btn');
-            memberBtns.forEach(btn => btn.classList.remove('active'));
-            btnElement.classList.add('active');
-
-            applyFilters();
+function filterMember(member, btnElement) {
+    const cards = document.querySelectorAll('.video-card');
+    
+    cards.forEach(card => {
+        // 直接抓取卡片裡面顯示成員的那段文字內容
+        const memberDiv = card.querySelector('.video-member');
+        const memberText = memberDiv ? memberDiv.innerText : '';
+        
+        // 如果選擇「全部」，或是該段文字裡面包含點擊的成員名字
+        if (member === 'all' || memberText.includes(member)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
         }
-
-// 點擊卡片上的狀態標籤進行循環切換
-        function toggleStatus(btn) {
-            let currentStatus = btn.getAttribute('data-status') || 'unwatched';
-            
-            // 狀態循環：未觀看 (unwatched) -> 觀看中 (watching) -> 已看過 (watched) -> 回到未觀看
-            if (currentStatus === 'unwatched') {
-                currentStatus = 'watching';
-                btn.innerText = '觀看中';
-                btn.className = 'status-badge watching';
-            } else if (currentStatus === 'watching') {
-                currentStatus = 'watched';
-                btn.innerText = '已看過';
-                btn.className = 'status-badge watched';
-            } else {
-                currentStatus = 'unwatched';
-                btn.innerText = '未觀看';
-                btn.className = 'status-badge unwatched';
-            }
-
-            btn.setAttribute('data-status', currentStatus);
-            
-            // 同時更新父層 card 的 data-status，讓上面的篩選列也能正常篩選！
-            const card = btn.closest('.video-card');
-            if (card) {
-                card.setAttribute('data-status', currentStatus);
-                // 順便把狀態文字對應好存起來（如果您是用中文篩選）
-                let statusText = '未觀看';
-                if (currentStatus === 'watching') statusText = '觀看中';
-                if (currentStatus === 'watched') statusText = '已看過';
-                card.setAttribute('data-status-text', statusText);
-            }
-        }
-
-        // 新增：觀看標籤篩選函式
-        function filterStatus(status, btnElement) {
-            const statusBtns = document.querySelectorAll('#status-filters .member-btn');
-            statusBtns.forEach(btn => btn.classList.remove('active'));
-            btnElement.classList.add('active');
-
-            applyFilters();
-        }
-
-        // 綜合過濾機制（同時支援成員與觀看狀態雙重篩選）
-        function applyFilters() {
-            const activeContent = document.querySelector('.tab-content.active');
-            if (!activeContent) return;
-
-            const activeMemberBtn = document.querySelector('#member-filters .member-btn.active');
-            const activeStatusBtn = document.querySelector('#status-filters .member-btn.active');
-
-            // 判斷目前選中的成員與狀態條件（如果成員列隱藏則視為 'all'）
-            const memberFiltersVisible = document.getElementById('member-filters').style.display !== 'none';
-            let currentMember = 'all';
-            if (memberFiltersVisible && activeMemberBtn) {
-                currentMember = activeMemberBtn.innerText.trim();
-            }
-
-            let currentStatus = 'all';
-            if (activeStatusBtn) {
-                const statusText = activeStatusBtn.innerText.trim();
-                if (statusText === '已看過') currentStatus = '已看過';
-                else if (statusText === '觀看中') currentStatus = '觀看中';
-                else if (statusText === '未觀看') currentStatus = '未觀看';
-            }
-
-            const cards = activeContent.querySelectorAll('.video-card');
-            cards.forEach(card => {
-                const cardMember = card.getAttribute('data-member');
-                const cardStatus = card.getAttribute('data-status');
-
-                const matchMember = (currentMember === '全部' || cardMember === currentMember || cardMember === '全員' || !memberFiltersVisible);
-                const matchStatus = (currentStatus === 'all' || cardStatus === currentStatus);
-
-                if (matchMember && matchStatus) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // 重設所有篩選按鈕與顯示狀態
-        function resetFilters() {
-            document.querySelectorAll('#member-filters .member-btn').forEach((btn, idx) => {
-                if(idx === 0) btn.classList.add('active');
-                else btn.classList.remove('active');
-            });
-            document.querySelectorAll('#status-filters .member-btn').forEach((btn, idx) => {
-                if(idx === 0) btn.classList.add('active');
-                else btn.classList.remove('active');
-            });
-
-            const activeContent = document.querySelector('.tab-content.active');
-            if (!activeContent) return;
-            const cards = activeContent.querySelectorAll('.video-card');
-            cards.forEach(card => card.style.display = 'block');
-        }
+    });
+}
 
         function sortVideos(grid) {
             if (!grid) return;
@@ -3880,30 +3693,10 @@
             });
         }
 
-        // 網頁一載入時，強制初始化為舞台分頁（隱藏成員篩選列、套用正確狀態）
+        // 網頁一載入時，強制初始化為舞台分頁（隱藏篩選列、套用正確狀態）
         document.addEventListener("DOMContentLoaded", function() {
             showTab('stage-content', document.querySelector('.tab-btn'), '#c48b59');
         });
-
-function changeStatus(selectElement) {
-            const selectedStatus = selectElement.value; // 取得選中的狀態（未觀看 / 觀看中 / 已看過）
-            const card = selectElement.closest('.video-card');
-            
-            if (card) {
-                // 1. 重要：把狀態同步寫到卡片外層，這樣上方的篩選列才讀得到！
-                card.setAttribute('data-status', selectedStatus);
-                
-                // 2. 存入瀏覽器記憶
-                const titleElement = card.querySelector('.video-title');
-                if (titleElement) {
-                    const title = titleElement.innerText;
-                    localStorage.setItem('video_status_' + title, selectedStatus);
-                }
-
-                // 3. 如果您當前剛好有開啟某個篩選條件，更新後可以立即重新執行一次篩選
-                // （如果您原本有寫篩選函式，可以在這裡呼叫它，例如 filterVideos()）
-            }
-        }
     </script>
 
     <footer>©ald1.a1mem</footer>
