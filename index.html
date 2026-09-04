@@ -3628,8 +3628,7 @@
 
     <!-- ================================== -->
 
-    <script>
-        function showTab(targetId, btnElement, themeColor) {
+function showTab(targetId, btnElement, themeColor) {
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => content.classList.remove('active'));
 
@@ -3658,24 +3657,53 @@
             if (activeGrid) {
                 sortVideos(activeGrid);
             }
+
+            // 切換分頁時，同步重置成員篩選按鈕狀態為「全部」，並顯示該分頁下的所有卡片
+            if (memberFilters) {
+                const filterBtns = memberFilters.querySelectorAll('.member-btn');
+                filterBtns.forEach(b => b.classList.remove('active'));
+                const allBtn = memberFilters.querySelector('.member-btn'); // 假設第一個是「全部」
+                if (allBtn) allBtn.classList.add('active');
+            }
+
+            const activeContent = document.getElementById(targetId);
+            if (activeContent) {
+                const cards = activeContent.querySelectorAll('.video-card');
+                cards.forEach(card => {
+                    card.style.display = 'block';
+                });
+            }
         }
 
-function filterMember(member, btnElement) {
-    const cards = document.querySelectorAll('.video-card');
-    
-    cards.forEach(card => {
-        // 直接抓取卡片裡面顯示成員的那段文字內容
-        const memberDiv = card.querySelector('.video-member');
-        const memberText = memberDiv ? memberDiv.innerText : '';
-        
-        // 如果選擇「全部」，或是該段文字裡面包含點擊的成員名字
-        if (member === 'all' || memberText.includes(member)) {
-            card.style.display = 'block';
-        } else {
-            card.style.display = 'none';
+        function filterMember(member, btnElement) {
+            // 1. 切換按鈕的 active 狀態
+            const memberFilters = document.getElementById('member-filters');
+            if (memberFilters) {
+                const buttons = memberFilters.querySelectorAll('.member-btn');
+                buttons.forEach(btn => btn.classList.remove('active'));
+            }
+            if (btnElement) {
+                btnElement.classList.add('active');
+            }
+
+            // 2. 取得目前顯示中的分頁內容
+            const activeTab = document.querySelector('.tab-content.active');
+            if (!activeTab) return;
+
+            // 3. 只針對目前顯示的分頁內的卡片做篩選
+            const cards = activeTab.querySelectorAll('.video-card');
+            
+            cards.forEach(card => {
+                const memberDiv = card.querySelector('.video-member');
+                const memberText = memberDiv ? memberDiv.innerText : '';
+                
+                if (member === 'all' || memberText.includes(member)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
-    });
-}
 
         function sortVideos(grid) {
             if (!grid) return;
