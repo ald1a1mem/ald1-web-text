@@ -132,6 +132,38 @@
             padding: 15px; /* 確保四周有空間，不會貼齊邊框 */
         }
 
+/* 觀看狀態互動標籤樣式 */
+        .status-badge {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            border: 2px solid var(--current-theme);
+            background-color: transparent;
+            color: var(--current-theme);
+            transition: all 0.3s ease;
+        }
+
+        /* 依據不同狀態顯示不同填滿顏色 */
+        .status-badge.watched {
+            background-color: var(--current-theme);
+            color: #ffffff;
+        }
+
+        .status-badge.watching {
+            background-color: #f39c12; /* 觀看中可以用亮橘色或主題色 */
+            border-color: #f39c12;
+            color: #ffffff;
+        }
+
+        .status-badge.unwatched {
+            background-color: transparent;
+            color: var(--current-theme);
+        }
+
         /* 影片標題、成員與日期樣式與超出防呆 */
         .video-card .video-title {
             color: var(--current-theme) !important;
@@ -3676,6 +3708,39 @@
             btnElement.classList.add('active');
 
             applyFilters();
+        }
+
+// 點擊卡片上的狀態標籤進行循環切換
+        function toggleStatus(btn) {
+            let currentStatus = btn.getAttribute('data-status') || 'unwatched';
+            
+            // 狀態循環：未觀看 (unwatched) -> 觀看中 (watching) -> 已看過 (watched) -> 回到未觀看
+            if (currentStatus === 'unwatched') {
+                currentStatus = 'watching';
+                btn.innerText = '觀看中';
+                btn.className = 'status-badge watching';
+            } else if (currentStatus === 'watching') {
+                currentStatus = 'watched';
+                btn.innerText = '已看過';
+                btn.className = 'status-badge watched';
+            } else {
+                currentStatus = 'unwatched';
+                btn.innerText = '未觀看';
+                btn.className = 'status-badge unwatched';
+            }
+
+            btn.setAttribute('data-status', currentStatus);
+            
+            // 同時更新父層 card 的 data-status，讓上面的篩選列也能正常篩選！
+            const card = btn.closest('.video-card');
+            if (card) {
+                card.setAttribute('data-status', currentStatus);
+                // 順便把狀態文字對應好存起來（如果您是用中文篩選）
+                let statusText = '未觀看';
+                if (currentStatus === 'watching') statusText = '觀看中';
+                if (currentStatus === 'watched') statusText = '已看過';
+                card.setAttribute('data-status-text', statusText);
+            }
         }
 
         // 新增：觀看標籤篩選函式
